@@ -36,6 +36,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "rest_framework",
     "rules.apps.AutodiscoverRulesConfig",
+    "common",
     "user_management",
 ]
 
