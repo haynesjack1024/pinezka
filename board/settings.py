@@ -36,6 +36,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "rest_framework",
     "rules.apps.AutodiscoverRulesConfig",
+    "user_management",
 ]
 
 MIDDLEWARE = [
@@ -77,6 +78,8 @@ DATABASES = {
         "NAME": BASE_DIR / "db.sqlite3",
     }
 }
+
+AUTH_USER_MODEL = "user_management.User"
 
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
