@@ -34,8 +34,8 @@ class PostSerializer(serializers.ModelSerializer):
     city = serializers.SlugRelatedField(
         slug_field="name", queryset=cities_models.City.objects.all()
     )
-    category = serializers.SlugRelatedField(
-        slug_field="name", queryset=models.PostCategory.objects.all()
+    category = serializers.PrimaryKeyRelatedField(
+        queryset=models.PostCategory.objects.all()
     )
     author = UserSerializer(read_only=True)
 
