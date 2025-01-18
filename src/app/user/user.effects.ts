@@ -10,6 +10,7 @@ import {
   TranslatedToastrService,
 } from '../translated-toastr.service';
 import { ActionCreator } from '@ngrx/store';
+import { _ } from '@ngx-translate/core';
 
 function createNotifEffect(
   action: ActionCreator,
@@ -84,13 +85,13 @@ export const navigateToPosts = createNavigationEffect(
 
 export const loginSuccessNotif = createNotifEffect(
   userApiActions.userLoginSucceeded,
-  'login.success',
+  _('login.success'),
   'success',
 );
 
 export const loginFailureNotif = createNotifEffect(
   userApiActions.userLoginFailed,
-  'login.failure',
+  _('login.failure'),
   'error',
 );
 
@@ -110,12 +111,12 @@ export const logoutUser = createEffect(
 
 export const logoutSuccessNotif = createNotifEffect(
   userApiActions.userLogoutSucceeded,
-  'logout.success',
+  _('logout.success'),
   'success',
 );
 
 export const logoutFailureNotif = createNotifEffect(
   userApiActions.userLogoutFailed,
-  'logout.failure',
+  _('logout.failure'),
   'error',
 );
