@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { TranslateService } from '@ngx-translate/core';
-import { first } from 'rxjs';
+import { takeUntil } from 'rxjs';
 
 export type ToastType = 'success' | 'error';
 
@@ -29,14 +29,14 @@ export class TranslatedToastrService {
       }
     })();
 
-    // set the toast's message to the translation
-    const translationSub = this.translate
+    this.translate
       .stream(key)
+      // close translation subscription on toast's destruction
+      .pipe(takeUntil(toast.onHidden))
       .subscribe(
         (message: unknown) =>
-          (toast.toastRef.componentInstance.message = message),
+          // set the toast's message to the translation
+          (toast.portal.instance.message = message),
       );
-    // close translation subscription on toast's destruction
-    toast.onHidden.pipe(first()).subscribe(() => translationSub.unsubscribe());
   }
 }
