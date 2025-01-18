@@ -17,8 +17,12 @@
       "login": "Sign In"
     }
   },
-  "toast": {
-    "signed-in": "Successfully logged in",
-    "error": "Oops, something went wrong"
+  "login": {
+    "success": "Successfully signed in",
+    "failure": "Failed to sign in"
+  },
+  "logout": {
+    "success": "Successfully signed out",
+    "failure": "Failed to sign out"
   }
 }

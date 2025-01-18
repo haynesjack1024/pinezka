@@ -6,7 +6,7 @@ import {
   ReactiveFormsModule,
 } from '@angular/forms';
 import { merge, mergeMap, Observable, of } from 'rxjs';
-import { _, TranslateService } from '@ngx-translate/core';
+import { TranslateService } from '@ngx-translate/core';
 import { AsyncPipe } from '@angular/common';
 
 @Component({
@@ -59,7 +59,6 @@ export class InputComponent implements OnInit {
   }
 
   private getControlError(): Observable<string> {
-    console.log('EMIT');
     if (
       !this.control?.errors ||
       (!this.formGroup.submitted && this.control.pristine)
@@ -71,6 +70,6 @@ export class InputComponent implements OnInit {
       unknown,
     ];
 
-    return this.translate.stream(_(`form.error.${key}`), error ?? {});
+    return this.translate.stream(`form.error.${key}`, error ?? {});
   }
 }
