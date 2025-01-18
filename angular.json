@@ -37,8 +37,15 @@
                 "input": "public"
               }
             ],
+            "stylePreprocessorOptions": {
+              "includePaths": [
+                "src/styles"
+              ]
+            },
             "styles": [
-              "src/styles.scss"
+              "node_modules/normalize.css/normalize.css",
+              "node_modules/ngx-toastr/toastr.css",
+              "src/styles/styles.scss"
             ],
             "scripts": []
           },

@@ -1,0 +1,49 @@
+@use "colors";
+
+@mixin input-button-base {
+  box-sizing: border-box;
+  border-radius: 6px;
+  padding: 0.6rem;
+  font-family: inherit;
+  transition: outline-width 0.1s ease;
+}
+
+input:not([type="submit"]) {
+  @include input-button-base;
+
+  background-color: var(--bright);
+  border: 1px solid var(--shade);
+  box-shadow: 0 4px 8px colors.opacify(var(--primary), 0.04);
+
+  &:hover,
+  &:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: -1px;
+  }
+}
+
+input[type="submit"],
+button {
+  @include input-button-base;
+
+  background-color: var(--accent);
+  color: var(--tint);
+  box-shadow:
+    0 2px 4px,
+    0 1px 2px colors.opacify(var(--primary), 0.08);
+  border: none;
+  outline: 0;
+  transition: box-shadow 0.15s ease;
+
+  &:hover,
+  &:focus-visible {
+    box-shadow:
+      0 6px 12px colors.opacify(var(--primary), 0.08),
+      0 12px 24px colors.opacify(var(--primary), 0.16);
+  }
+
+  &:active {
+    outline: 2px solid colors.opacify(var(--primary), 0.86);
+    outline-offset: -2px;
+  }
+}

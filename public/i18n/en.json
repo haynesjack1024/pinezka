@@ -3,5 +3,22 @@
     "created-label": "Added",
     "expiry-label": "Expires",
     "modified-label": "Last modified"
+  },
+  "form": {
+    "error": {
+      "required": "This field is required",
+      "minlength": "Minimum length {{requiredLength}}",
+      "maxlength": "Maximum length {{requiredLength}}",
+      "email": "Invalid email address"
+    },
+    "label": {
+      "username": "Username",
+      "password": "Password",
+      "login": "Sign In"
+    }
+  },
+  "toast": {
+    "signed-in": "Successfully logged in",
+    "error": "Oops, something went wrong"
   }
 }

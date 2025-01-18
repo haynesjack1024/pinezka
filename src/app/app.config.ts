@@ -5,6 +5,8 @@ import { provideTranslateService, TranslateLoader } from '@ngx-translate/core';
 import { routes } from './app.routes';
 import { HttpClient, provideHttpClient } from '@angular/common/http';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { provideAnimations } from '@angular/platform-browser/animations';
+import { provideToastr } from 'ngx-toastr';
 
 const httpLoaderFactory: (http: HttpClient) => TranslateHttpLoader = (
   http: HttpClient,
@@ -22,5 +24,7 @@ export const appConfig: ApplicationConfig = {
       },
     }),
     provideRouter(routes),
+    provideAnimations(),
+    provideToastr(),
   ],
 };
