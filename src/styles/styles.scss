@@ -1,6 +1,7 @@
 @import url("fonts.scss");
 @import url("_colors.scss");
 @import url("inputs.scss");
+@import url("toastr.scss");
 
 html {
   height: 100%;
@@ -11,9 +12,7 @@ body {
   padding: 0;
   height: 100%;
   background-color: var(--tint);
-}
 
-* {
   font-family:
     IBM Plex Sans,
     sans-serif;
