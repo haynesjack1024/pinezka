@@ -12,7 +12,7 @@ export const routes: Routes = [
   },
   {
     path: '',
-    redirectTo: '/users/login',
+    redirectTo: '/login',
     pathMatch: 'full',
   },
   {
