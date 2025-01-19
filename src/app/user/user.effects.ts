@@ -1,9 +1,23 @@
-import { Actions, createEffect, FunctionalEffect, ofType } from '@ngrx/effects';
+import {
+  Actions,
+  createEffect,
+  FunctionalEffect,
+  ofType,
+  ROOT_EFFECTS_INIT,
+} from '@ngrx/effects';
 import { inject } from '@angular/core';
 import { UserService } from './user.service';
-import { catchError, debounceTime, exhaustMap, map, of, tap } from 'rxjs';
+import {
+  catchError,
+  debounceTime,
+  EMPTY,
+  exhaustMap,
+  map,
+  of,
+  tap,
+} from 'rxjs';
 
-import { login, logout, userApiActions, userServiceInit } from './user.actions';
+import { login, logout, userApiActions } from './user.actions';
 import { Router } from '@angular/router';
 import {
   ToastType,
@@ -32,13 +46,13 @@ function createNotifEffect(
 }
 
 function createNavigationEffect(
-  action: ActionCreator,
+  actions: ActionCreator[],
   path: string[],
 ): FunctionalEffect {
   return createEffect(
     (actions$ = inject(Actions), router = inject(Router)) =>
       actions$.pipe(
-        ofType(action),
+        ofType(...actions),
         tap(() => router.navigate(path)),
       ),
     { functional: true, dispatch: false },
@@ -48,11 +62,11 @@ function createNavigationEffect(
 export const checkIsUserLoggedIn = createEffect(
   (actions$ = inject(Actions), userService = inject(UserService)) =>
     actions$.pipe(
-      ofType(userServiceInit),
+      ofType(ROOT_EFFECTS_INIT),
       exhaustMap(() =>
         userService.checkSession().pipe(
           map((user) => userApiActions.loggedInUserFound(user)),
-          catchError(() => of(userApiActions.noLoggedInUserFound())),
+          catchError(() => EMPTY),
         ),
       ),
     ),
@@ -60,7 +74,7 @@ export const checkIsUserLoggedIn = createEffect(
 );
 
 export const navigateToLoginPage = createNavigationEffect(
-  userApiActions.noLoggedInUserFound,
+  [userApiActions.sessionExpired, userApiActions.userLogoutSucceeded],
   ['login'],
 );
 
@@ -79,7 +93,7 @@ export const loginUser = createEffect(
 );
 
 export const navigateToPosts = createNavigationEffect(
-  userApiActions.userLoginSucceeded,
+  [userApiActions.userLoginSucceeded],
   ['posts'],
 );
 

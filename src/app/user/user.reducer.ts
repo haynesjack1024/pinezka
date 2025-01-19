@@ -4,10 +4,12 @@ import { User } from './models';
 
 interface State {
   readonly user: User | null;
+  readonly loggedIn: boolean | null;
 }
 
 const initialState: State = {
   user: null,
+  loggedIn: null,
 };
 
 export const userFeature = createFeature({
@@ -20,13 +22,20 @@ export const userFeature = createFeature({
       (state, user) => ({
         ...state,
         user,
+        loggedIn: true,
       }),
     ),
-    on(userApiActions.userLogoutSucceeded, (state) => ({
-      ...state,
-      user: null,
-    })),
+    on(
+      userApiActions.userLogoutSucceeded,
+      userApiActions.sessionExpired,
+      (state) => ({
+        ...state,
+        user: null,
+        loggedIn: false,
+      }),
+    ),
   ),
 });
 
-export const { name, reducer, selectUserState, selectUser } = userFeature;
+export const { name, reducer, selectUserState, selectUser, selectLoggedIn } =
+  userFeature;

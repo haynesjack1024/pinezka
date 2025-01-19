@@ -1,18 +1,16 @@
 import { Routes } from '@angular/router';
 import { userRoutes } from './user/routes';
+import { postRoutes } from './posts/routes';
 
 export const routes: Routes = [
   ...userRoutes,
   {
     path: 'posts',
-    loadComponent: () =>
-      import('./posts/post-list/post-list.component').then(
-        (c) => c.PostListComponent,
-      ),
+    children: postRoutes,
   },
   {
     path: '',
-    redirectTo: '/login',
+    redirectTo: '/posts',
     pathMatch: 'full',
   },
   {

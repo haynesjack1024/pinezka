@@ -1,0 +1,10 @@
+<span class="title">{{ post.title }}</span>
+<div class="info">
+  <div class="chips">
+    <span class="chip outline">{{ post.city }}</span>
+    <span class="chip">{{ post.author.username }}</span>
+  </div>
+  <div>
+    {{ "post.modified-label" | translate }} {{ post.modified | date: "short" }}
+  </div>
+</div>
