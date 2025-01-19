@@ -6,7 +6,7 @@ import {
   ROOT_EFFECTS_INIT,
 } from '@ngrx/effects';
 import { inject } from '@angular/core';
-import { UserService } from './user.service';
+import { UserService } from '../user.service';
 import {
   catchError,
   debounceTime,
@@ -17,12 +17,12 @@ import {
   tap,
 } from 'rxjs';
 
-import { login, logout, userApiActions } from './user.actions';
+import { login, logout, userApiActions } from './actions';
 import { Router } from '@angular/router';
 import {
   ToastType,
   TranslatedToastrService,
-} from '../translated-toastr.service';
+} from '../../translated-toastr.service';
 import { ActionCreator } from '@ngrx/store';
 import { _ } from '@ngx-translate/core';
 

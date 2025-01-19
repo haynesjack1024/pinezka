@@ -1,6 +1,6 @@
 import { createFeature, createReducer, on } from '@ngrx/store';
-import { userApiActions } from './user.actions';
-import { User } from './models';
+import { userApiActions } from './actions';
+import { User } from '../models';
 
 interface State {
   readonly user: User | null;

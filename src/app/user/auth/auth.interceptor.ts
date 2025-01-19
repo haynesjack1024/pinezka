@@ -2,7 +2,7 @@ import { HttpInterceptorFn } from '@angular/common/http';
 import { catchError, EMPTY } from 'rxjs';
 import { inject } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { userApiActions } from '../user.actions';
+import { userApiActions } from '../store/actions';
 
 export const authInterceptor: HttpInterceptorFn = (req, next) => {
   const store = inject(Store);

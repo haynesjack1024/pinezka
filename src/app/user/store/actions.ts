@@ -4,7 +4,7 @@ import {
   emptyProps,
   props,
 } from '@ngrx/store';
-import { User, UserLoginDetails } from './models';
+import { User, UserLoginDetails } from '../models';
 
 export const login = createAction(
   '[Login Component] User signed in',

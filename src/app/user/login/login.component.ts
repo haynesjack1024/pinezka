@@ -8,7 +8,7 @@ import {
 import { InputComponent } from '../../forms/input/input.component';
 import { TranslatePipe } from '@ngx-translate/core';
 import { Store } from '@ngrx/store';
-import { login } from '../user.actions';
+import { login } from '../store/actions';
 
 @Component({
   selector: 'app-login',

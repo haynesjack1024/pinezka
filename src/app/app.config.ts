@@ -14,8 +14,8 @@ import { provideToastr } from 'ngx-toastr';
 import { provideState, provideStore } from '@ngrx/store';
 import { provideEffects } from '@ngrx/effects';
 
-import * as userEffects from './user/user.effects';
-import { userFeature } from './user/user.reducer';
+import * as userEffects from './user/store/effects';
+import { userFeature } from './user/store/reducer';
 import { authInterceptor } from './user/auth/auth.interceptor';
 
 const httpLoaderFactory: (http: HttpClient) => TranslateHttpLoader = (
