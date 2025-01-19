@@ -1,4 +1,4 @@
-from django.contrib.auth import authenticate, get_user_model, login
+from django.contrib.auth import authenticate, get_user_model, login, logout
 from rest_framework import permissions, status, viewsets
 from rest_framework.decorators import (
     api_view,
@@ -43,3 +43,9 @@ def authenticate_user(request):
         return Response(serializers.UserSerializer(user).data)
     else:
         return Response(status=status.HTTP_400_BAD_REQUEST)
+
+
+@api_view(["POST"])
+def logout_view(request):
+    logout(request)
+    return Response(status=status.HTTP_204_NO_CONTENT)
