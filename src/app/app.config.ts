@@ -17,6 +17,7 @@ import { provideEffects } from '@ngrx/effects';
 import * as userEffects from './user/store/effects';
 import { userFeature } from './user/store/reducer';
 import { authInterceptor } from './user/auth/auth.interceptor';
+import { csrfInterceptor } from './user/auth/csrf.interceptor';
 
 const httpLoaderFactory: (http: HttpClient) => TranslateHttpLoader = (
   http: HttpClient,
@@ -25,7 +26,7 @@ const httpLoaderFactory: (http: HttpClient) => TranslateHttpLoader = (
 export const appConfig: ApplicationConfig = {
   providers: [
     provideZoneChangeDetection({ eventCoalescing: true }),
-    provideHttpClient(withInterceptors([authInterceptor])),
+    provideHttpClient(withInterceptors([authInterceptor, csrfInterceptor])),
     provideTranslateService({
       loader: {
         provide: TranslateLoader,

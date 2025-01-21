@@ -1,8 +1,8 @@
 <span class="title">{{ post.title }}</span>
 <div class="info">
   <div class="chips">
-    <span class="chip outline">{{ post.city }}</span>
-    <span class="chip">{{ post.author.username }}</span>
+    <app-chip>{{ post.city }}</app-chip>
+    <app-chip class="outline">{{ post.author.username }}</app-chip>
   </div>
   <div>
     {{ "post.modified-label" | translate }} {{ post.modified | date: "short" }}

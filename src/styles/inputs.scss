@@ -2,23 +2,21 @@
 
 @mixin input-button-base {
   box-sizing: border-box;
-  border-radius: 6px;
   padding: 0.6rem;
+  border-radius: var(--border-radius-standard);
+  box-shadow: var(--light-box-shadow);
   font-family: inherit;
-  transition: outline-width 0.1s ease;
 }
 
 input:not([type="submit"]) {
   @include input-button-base;
 
   background-color: var(--bright);
-  border: 1px solid var(--shade);
-  box-shadow: 0 4px 8px colors.opacify(var(--primary), 0.04);
+  border: var(--border-thin) solid var(--shade);
 
-  &:hover,
   &:focus-visible {
-    outline: 2px solid var(--accent);
-    outline-offset: -1px;
+    outline: var(--border-medium) solid var(--accent);
+    outline-offset: var(--border-thin-neg);
   }
 }
 
@@ -28,22 +26,19 @@ button {
 
   background-color: var(--accent);
   color: var(--tint);
-  box-shadow:
-    0 2px 4px,
-    0 1px 2px colors.opacify(var(--primary), 0.08);
   border: none;
-  outline: 0;
+  outline: none;
   transition: box-shadow 0.15s ease;
+  padding: 0.6rem;
+  height: fit-content;
 
   &:hover,
   &:focus-visible {
-    box-shadow:
-      0 6px 12px colors.opacify(var(--primary), 0.08),
-      0 12px 24px colors.opacify(var(--primary), 0.16);
+    box-shadow: var(--medium-box-shadow);
   }
 
   &:active {
-    outline: 2px solid colors.opacify(var(--primary), 0.86);
-    outline-offset: -2px;
+    outline: var(--border-medium) solid colors.opacify(var(--primary), 0.86);
+    outline-offset: var(--border-medium-neg);
   }
 }

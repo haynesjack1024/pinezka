@@ -1,12 +1,11 @@
 import { Routes } from '@angular/router';
 import { userRoutes } from './user/routes';
-import { postRoutes } from './posts/routes';
 
 export const routes: Routes = [
   ...userRoutes,
   {
     path: 'posts',
-    children: postRoutes,
+    loadChildren: () => import('./posts/routes').then((m) => m.postRoutes),
   },
   {
     path: '',

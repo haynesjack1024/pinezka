@@ -1,0 +1,23 @@
+@let user = user$ | async;
+
+<div class="navbar">
+  <div>
+    {{ "website-name" | translate | uppercase }}
+  </div>
+
+  <div class="navbar-items-container">
+    <app-chip class="outline">{{ user?.username }}</app-chip>
+    <button (click)="onBarsClick()" class="user-dropdown-button">
+      <fa-icon [icon]="faBars" />
+    </button>
+  </div>
+
+  @if (showUserDropdown) {
+    <div class="user-dropdown">
+      <button>{{ "navbar.settings" | translate }}</button>
+      <button (click)="onLogout()">{{ "navbar.logout" | translate }}</button>
+    </div>
+  }
+</div>
+
+<router-outlet />

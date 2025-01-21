@@ -1,0 +1,26 @@
+.chip {
+  display: inline-flex;
+  align-items: center;
+  height: 2.25rem;
+  padding: 0 1rem;
+  border-radius: var(--border-radius-chip);
+  background-color: var(--accent);
+  box-sizing: border-box;
+}
+
+.chip-text {
+  height: min-content;
+  width: min-content;
+  color: var(--bright);
+}
+
+:host.outline {
+  & > .chip {
+    background-color: transparent;
+    border: var(--border-medium) solid var(--accent);
+
+    & > .chip-text {
+      color: var(--primary);
+    }
+  }
+}

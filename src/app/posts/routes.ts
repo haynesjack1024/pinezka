@@ -1,10 +1,10 @@
 import { Routes } from '@angular/router';
-import { authGuard } from '../user/auth/auth.guard';
+import { NavbarComponent } from '../navbar/navbar.component';
 
 export const postRoutes: Routes = [
   {
     path: '',
-    canActivateChild: [authGuard],
+    component: NavbarComponent,
     children: [
       {
         path: '',

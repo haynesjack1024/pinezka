@@ -1,4 +1,5 @@
 {
+  "website-name": "pinezka",
   "post": {
     "created-label": "Added",
     "expiry-label": "Expires",
@@ -24,5 +25,10 @@
   "logout": {
     "success": "Successfully signed out",
     "failure": "Failed to sign out"
+  },
+  "navbar": {
+    "login": "Sign In",
+    "logout": "Sign Out",
+    "settings": "Account Settings"
   }
 }
