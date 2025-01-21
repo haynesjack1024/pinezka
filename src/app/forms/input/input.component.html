@@ -1,7 +1,7 @@
 @if (control) {
   <label>
     {{ label }}
-    <input [type]="type" [formControl]="control" />
+    <input class="form-input" [type]="type" [formControl]="control" />
   </label>
   <div class="error">{{ error$ | async }}</div>
 }

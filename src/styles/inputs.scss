@@ -8,7 +8,7 @@
   font-family: inherit;
 }
 
-input:not([type="submit"]) {
+input.form-input {
   @include input-button-base;
 
   background-color: var(--bright);
