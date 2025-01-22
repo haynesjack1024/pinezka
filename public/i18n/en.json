@@ -30,5 +30,6 @@
     "login": "Sign In",
     "logout": "Sign Out",
     "settings": "Account Settings"
-  }
+  },
+  "filtering-sidebar-title": "Filtering"
 }

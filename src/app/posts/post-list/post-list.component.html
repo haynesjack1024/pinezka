@@ -1,5 +1,8 @@
-<app-search-bar></app-search-bar>
+<app-filtering-sidebar class="left-column"> </app-filtering-sidebar>
+<div class="center-column">
+  <app-search-bar></app-search-bar>
 
-@for (post of posts; track post.id) {
-  <app-post-item [post]="post" />
-}
+  @for (post of posts; track post.id) {
+    <app-post-item [post]="post" />
+  }
+</div>

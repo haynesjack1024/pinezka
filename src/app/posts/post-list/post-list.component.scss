@@ -1,13 +1,18 @@
 :host {
-  display: flex;
-  padding: 1rem;
-  flex-direction: column;
-  align-items: center;
-  row-gap: 1rem;
-  margin: 0 auto;
+  box-sizing: border-box;
+  width: 100%;
 
-  width: 36.848rem;
-  @media (max-width: 48rem) {
-    width: 80%;
-  }
+  display: grid;
+  grid-template-columns: 1fr min(60%, 37rem) 1fr;
+  gap: 1rem;
+
+  padding: 1rem;
+}
+
+.left-column {
+  justify-self: left;
+}
+
+.center-column {
+  justify-self: center;
 }
