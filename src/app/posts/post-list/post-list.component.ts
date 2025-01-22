@@ -3,10 +3,11 @@ import { PostService } from '../post.service';
 import { Post } from '../models';
 import { PostItemComponent } from '../post-item/post-item.component';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { SearchBarComponent } from '../../forms/search-bar/search-bar.component';
 
 @Component({
   selector: 'app-post-list',
-  imports: [PostItemComponent],
+  imports: [PostItemComponent, SearchBarComponent],
   templateUrl: './post-list.component.html',
   styleUrl: './post-list.component.scss',
 })

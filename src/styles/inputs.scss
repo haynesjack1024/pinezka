@@ -2,7 +2,7 @@
 
 @mixin input-button-base {
   box-sizing: border-box;
-  padding: 0.6rem;
+  padding: var(--padding-input);
   border-radius: var(--border-radius-standard);
   box-shadow: var(--light-box-shadow);
   font-family: inherit;
@@ -29,7 +29,6 @@ button {
   border: none;
   outline: none;
   transition: box-shadow 0.15s ease;
-  padding: 0.6rem;
   height: fit-content;
 
   &:hover,

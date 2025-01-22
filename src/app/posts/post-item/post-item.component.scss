@@ -7,13 +7,9 @@
   flex-direction: column;
   row-gap: 1rem;
   box-sizing: border-box;
-  width: 36.848rem;
   border-radius: var(--border-radius-standard);
   padding: 1rem;
-
-  @media (max-width: 48rem) {
-    width: 80%;
-  }
+  width: 100%;
 }
 
 .title {
