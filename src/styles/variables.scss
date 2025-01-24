@@ -17,8 +17,9 @@
 
   // BOX SHADOW
 
-  --light-box-shadow: 0 4px 8px 0 #{colors.opacify(var(--primary), 0.06)};
-  --medium-box-shadow: 0 6px 12px 0 #{colors.opacify(var(--primary), 0.42)};
+  --light-box-shadow: 0 4px 8px 0 #{colors.opacify(var(--primary), 0.08)};
+  --medium-box-shadow: 0 2px 6px 0 #{colors.opacify(var(--primary), 0.24)};
+  --heavy-box-shadow: 0 2px 6px 0 #{colors.opacify(var(--primary), 0.42)};
 
   // BORDER WIDTH
 

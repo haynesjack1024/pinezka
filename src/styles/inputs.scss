@@ -4,7 +4,6 @@
   box-sizing: border-box;
   padding: var(--padding-input);
   border-radius: var(--border-radius-standard);
-  box-shadow: var(--light-box-shadow);
   font-family: inherit;
 }
 
@@ -13,6 +12,7 @@ input.form-input {
 
   background-color: var(--bright);
   border: var(--border-thin) solid var(--shade);
+  box-shadow: var(--light-box-shadow);
 
   &:focus-visible {
     outline: var(--border-medium) solid var(--accent);
@@ -28,12 +28,13 @@ button {
   color: var(--tint);
   border: none;
   outline: none;
+  box-shadow: var(--medium-box-shadow);
   transition: box-shadow 0.15s ease;
   height: fit-content;
 
   &:hover,
   &:focus-visible {
-    box-shadow: var(--medium-box-shadow);
+    box-shadow: var(--heavy-box-shadow);
   }
 
   &:active {
