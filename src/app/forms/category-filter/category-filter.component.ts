@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, DestroyRef, OnInit } from '@angular/core';
 import { CategoryService } from './category.service';
 import { BehaviorSubject, map, Observable } from 'rxjs';
 import { Category, Subcategory } from './models';
 import { AsyncPipe } from '@angular/common';
 import { TranslatePipe } from '@ngx-translate/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-category-filter',
@@ -41,6 +42,7 @@ export class CategoryFilterComponent implements OnInit {
   public constructor(
     private route: ActivatedRoute,
     private categoryService: CategoryService,
+    private destroyRef: DestroyRef,
   ) {}
 
   public ngOnInit(): void {
@@ -53,15 +55,18 @@ export class CategoryFilterComponent implements OnInit {
             ? parseInt(category)
             : null;
         }),
+        takeUntilDestroyed(this.destroyRef),
       )
       .subscribe((categoryId: number | null) => {
         if (categoryId === null) {
           this.categoryService
             .getTopmostCategories()
+            .pipe(takeUntilDestroyed(this.destroyRef))
             .subscribe((categories) => this.categories$.next(categories));
         } else {
           this.categoryService
             .getCategory(categoryId)
+            .pipe(takeUntilDestroyed(this.destroyRef))
             .subscribe((category) => this.categories$.next([category]));
         }
       });
