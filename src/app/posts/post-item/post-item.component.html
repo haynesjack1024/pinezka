@@ -4,7 +4,7 @@
     <app-chip>{{ post.city }}</app-chip>
     <app-chip class="outline">{{ post.author.username }}</app-chip>
   </div>
-  <div>
+  <div class="last-modified">
     {{ "post.modified-label" | translate }} {{ post.modified | date: "short" }}
   </div>
 </div>
