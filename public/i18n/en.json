@@ -31,5 +31,27 @@
     "logout": "Sign Out",
     "settings": "Account Settings"
   },
-  "filtering-sidebar-title": "Filtering"
+  "filtering-sidebar-title": "Filtering",
+  "category-filter": {
+    "title": "Category",
+    "current": "CURRENT",
+    "previous": "GO BACK"
+  },
+  "category": {
+    "properties": "Properties",
+    "flats": "Flats",
+    "real-estate": "Real Estate",
+    "buy": "Buy",
+    "rent": "Rent",
+    "job-offers": "Job Offers",
+    "full-time": "Full Time",
+    "part-time": "Part Time",
+    "cars": "Cars",
+    "services": "Services",
+    "electronics": "Electronics",
+    "animals": "Animals",
+    "dogs": "Dogs",
+    "cats": "Cats",
+    "guinea pigs": "Guinea Pigs"
+  }
 }
