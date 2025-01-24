@@ -8,6 +8,7 @@
     class="previous"
     routerLink="."
     [queryParams]="{ category: parent.parent }"
+    queryParamsHandling="merge"
   >
     {{ "category-filter.previous" | translate }}
   </a>
@@ -27,7 +28,12 @@
 
 <div class="categories">
   @for (category of subcategories; track category.id) {
-    <a class="child" routerLink="." [queryParams]="{ category: category.id }">
+    <a
+      class="child"
+      routerLink="."
+      [queryParams]="{ category: category.id }"
+      queryParamsHandling="merge"
+    >
       {{ "category." + category.name | translate }}
     </a>
   }

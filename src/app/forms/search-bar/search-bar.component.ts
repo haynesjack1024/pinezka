@@ -1,53 +1,42 @@
-import { Component, forwardRef } from '@angular/core';
+import { Component, DestroyRef, OnInit } from '@angular/core';
 import { FaIconComponent } from '@fortawesome/angular-fontawesome';
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-
-export type OnChangeFn = (value: string) => unknown;
-export type OnTouchedFn = () => unknown;
+import { FormControl, ReactiveFormsModule } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
+import { debounceTime } from 'rxjs';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-search-bar',
-  imports: [FaIconComponent],
+  imports: [FaIconComponent, ReactiveFormsModule],
   templateUrl: './search-bar.component.html',
   styleUrl: './search-bar.component.scss',
-  providers: [
-    {
-      provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => SearchBarComponent),
-      multi: true,
-    },
-  ],
 })
-export class SearchBarComponent implements ControlValueAccessor {
-  protected value: string = '';
-  private onChangeWrapped: OnChangeFn = () => {
-    return;
-  };
-  protected onTouched: OnTouchedFn = () => {
-    return;
-  };
-  protected disabled: boolean = false;
+export class SearchBarComponent implements OnInit {
+  protected formControl: FormControl<string> = new FormControl<string>('', {
+    nonNullable: true,
+  });
 
-  public writeValue(value: string): void {
-    this.value = value;
-  }
+  public constructor(
+    private route: ActivatedRoute,
+    private router: Router,
+    private destroyRef: DestroyRef,
+  ) {}
 
-  protected onChange(event: Event): void {
-    const value: string = (event.target as HTMLInputElement).value;
-    this.onChangeWrapped(value);
-  }
-
-  public registerOnChange(fn: OnChangeFn): void {
-    this.onChangeWrapped = fn;
-  }
-
-  public registerOnTouched(fn: OnTouchedFn): void {
-    this.onTouched = fn;
-  }
-
-  public setDisabledState(isDisabled: boolean): void {
-    this.disabled = isDisabled;
+  public ngOnInit(): void {
+    this.formControl.setValue(
+      this.route.snapshot.queryParamMap.get('search') ?? '',
+      { emitEvent: false },
+    );
+    this.formControl.valueChanges
+      .pipe(debounceTime(300), takeUntilDestroyed(this.destroyRef))
+      .subscribe((value) =>
+        this.router.navigate([], {
+          relativeTo: this.route,
+          queryParams: { search: value ? value : null },
+          queryParamsHandling: 'merge',
+        }),
+      );
   }
 
   protected readonly faMagnifyingGlass = faMagnifyingGlass;

@@ -1,8 +1,2 @@
-<input
-  [value]="value"
-  (change)="onChange($event)"
-  (blur)="onTouched()"
-  [disabled]="disabled"
-  size="0"
-/>
+<input [formControl]="formControl" size="0" />
 <fa-icon [icon]="faMagnifyingGlass"></fa-icon>
