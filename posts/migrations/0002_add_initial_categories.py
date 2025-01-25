@@ -3,27 +3,27 @@
 from django.db import migrations
 
 INITIAL_CATEGORIES = {
-    "Nieruchomości": {
-        "Mieszkania": {
-            "Sprzedaż": {},
-            "Wynajem": {},
+    "properties": {
+        "flats": {
+            "sell": {},
+            "rent": {},
         },
-        "Domy": {
-            "Sprzedaż": {},
-            "Wynajem": {},
+        "real-estate": {
+            "sell": {},
+            "rent": {},
         },
     },
-    "Praca": {
-        "UOP": {},
-        "B2B": {},
+    "job-offers": {
+        "full-time": {},
+        "part-time": {},
     },
-    "Motoryzacja": {},
-    "Usługi": {},
-    "Elektronika": {},
-    "Zwierzęta": {
-        "Psy": {},
-        "Koty": {},
-        "Świnki morskie": {},
+    "cars": {},
+    "services": {},
+    "electronics": {},
+    "animals": {
+        "dogs": {},
+        "cats": {},
+        "guinea-pigs": {},
     },
 }
 
@@ -40,21 +40,11 @@ def add_initial_categories(apps, schema_editor):
         add_category(category_name, category_children)
 
 
-def remove_initial_cities(apps, schema_editor):
-    PostCategory = apps.get_model("posts", "PostCategory")
-
-    def remove_category(name: str, children: dict):
-        for child_name, child_children in children.items():
-            remove_category(child_name, child_children)
-        PostCategory.objects.filter(name=name).delete()
-
-    for category_name, category_children in INITIAL_CATEGORIES.items():
-        remove_category(category_name, category_children)
-
-
 class Migration(migrations.Migration):
     dependencies = [
         ("posts", "0001_initial"),
     ]
 
-    operations = [migrations.RunPython(add_initial_categories, remove_initial_cities)]
+    operations = [
+        migrations.RunPython(add_initial_categories, migrations.RunPython.noop)
+    ]

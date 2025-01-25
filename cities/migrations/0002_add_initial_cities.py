@@ -43,14 +43,9 @@ def add_initial_cities(apps, schema_editor):
         City.objects.create(name=city_name)
 
 
-def remove_initial_cities(apps, schema_editor):
-    City = apps.get_model("cities", "City")
-    City.objects.filter(name__in=INITIAL_CITIES).delete()
-
-
 class Migration(migrations.Migration):
     dependencies = [
         ("cities", "0001_initial"),
     ]
 
-    operations = [migrations.RunPython(add_initial_cities, remove_initial_cities)]
+    operations = [migrations.RunPython(add_initial_cities, migrations.RunPython.noop)]
