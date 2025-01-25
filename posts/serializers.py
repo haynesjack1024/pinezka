@@ -7,21 +7,18 @@ from user_management.serializers import UserSerializer
 from . import models
 
 
+class PostCategoryTinySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.PostCategory
+        fields = ["id", "name"]
+
+
 class PostCategorySerializer(serializers.ModelSerializer):
-    subcategories = serializers.SlugRelatedField(
-        slug_field="name",
-        read_only=True,
-        many=True,
-    )
+    subcategories = PostCategoryTinySerializer(many=True, read_only=True)
 
     class Meta:
         model = models.PostCategory
-        fields = ["parent", "name", "subcategories"]
-        extra_kwargs = {
-            "parent": {
-                "write_only": True,
-            }
-        }
+        fields = ["id", "parent", "name", "subcategories"]
 
     def validate(self, attrs):
         try:

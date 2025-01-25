@@ -14,6 +14,11 @@ class PostCategoryViewSet(AutoPermissionViewSetMixin, viewsets.ModelViewSet):
             return qs.filter(parent__isnull=True)
         return qs
 
+    def get_serializer_class(self):
+        if self.action == "list":
+            return serializers.PostCategoryTinySerializer
+        return super().get_serializer_class()
+
 
 class PostViewSet(AutoPermissionViewSetMixin, viewsets.ModelViewSet):
     queryset = models.Post.objects.all()
