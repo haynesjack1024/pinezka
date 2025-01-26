@@ -7,7 +7,7 @@ import { SearchBarComponent } from '../../forms/search-bar/search-bar.component'
 import { FilteringSidebarComponent } from '../../forms/filtering-sidebar/filtering-sidebar.component';
 import { ActivatedRoute } from '@angular/router';
 import { combineLatest, map, Observable } from 'rxjs';
-import { CategoryService } from '../../forms/category-filter/category.service';
+import { CategoryService } from '../../categories/category.service';
 
 @Component({
   selector: 'app-post-list',

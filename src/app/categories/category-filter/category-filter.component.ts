@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { CategoryService } from './category.service';
+import { CategoryService } from '../category.service';
 import { Observable } from 'rxjs';
-import { CurrentCategory } from './models';
+import { CurrentCategory } from '../models';
 import { AsyncPipe } from '@angular/common';
 import { TranslatePipe } from '@ngx-translate/core';
 import { RouterLink } from '@angular/router';
