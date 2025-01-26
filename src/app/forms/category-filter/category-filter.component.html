@@ -1,13 +1,12 @@
-@let parent = parent$ | async;
-@let subcategories = subcategories$ | async;
+@let category = category$ | async;
 
 <span class="title">{{ "category-filter.title" | translate }}</span>
 
-@if (parent) {
+@if (category?.id) {
   <a
     class="previous"
     routerLink="."
-    [queryParams]="{ category: parent.parent }"
+    [queryParams]="{ category: category?.parent }"
     queryParamsHandling="merge"
   >
     {{ "category-filter.previous" | translate }}
@@ -18,8 +17,8 @@
       "category-filter.current" | translate
     }}</span>
     <div class="parent-name">
-      {{ "category." + parent.name | translate }}
-      @if (subcategories?.length) {
+      {{ "category." + category?.name | translate }}
+      @if (category?.subcategories?.length) {
         <span class="separator"></span>
       }
     </div>
@@ -27,14 +26,14 @@
 }
 
 <div class="categories">
-  @for (category of subcategories; track category.id) {
+  @for (subcategory of category?.subcategories; track subcategory.id) {
     <a
       class="child"
       routerLink="."
-      [queryParams]="{ category: category.id }"
+      [queryParams]="{ category: subcategory.id }"
       queryParamsHandling="merge"
     >
-      {{ "category." + category.name | translate }}
+      {{ "category." + subcategory.name | translate }}
     </a>
   }
 </div>

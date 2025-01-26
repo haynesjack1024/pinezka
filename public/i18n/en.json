@@ -41,7 +41,7 @@
     "properties": "Properties",
     "flats": "Flats",
     "real-estate": "Real Estate",
-    "buy": "Buy",
+    "sell": "Sell",
     "rent": "Rent",
     "job-offers": "Job Offers",
     "full-time": "Full Time",
@@ -52,6 +52,6 @@
     "animals": "Animals",
     "dogs": "Dogs",
     "cats": "Cats",
-    "guinea pigs": "Guinea Pigs"
+    "guinea-pigs": "Guinea Pigs"
   }
 }
