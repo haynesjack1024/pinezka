@@ -60,5 +60,10 @@
   },
   "expiry-filter": {
     "title": "Expired"
+  },
+  "sorting": {
+    "alpha": "Alphabetically",
+    "modified": "By last modification date",
+    "view-count": "By view count"
   }
 }

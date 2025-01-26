@@ -1,0 +1,9 @@
+@for (sortType of sortingTypes; track sortType) {
+  <app-chip
+    class="clickable shadow"
+    [ngClass]="{ outline: sorting !== sortType }"
+    (click)="onChipClick(sortType)"
+  >
+    {{ "sorting." + sortType | translate }}
+  </app-chip>
+}

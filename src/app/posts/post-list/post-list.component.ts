@@ -8,10 +8,16 @@ import { FilteringSidebarComponent } from '../filtering-sidebar/filtering-sideba
 import { ActivatedRoute } from '@angular/router';
 import { combineLatest, map, Observable } from 'rxjs';
 import { CategoryService } from '../../categories/category.service';
+import { SorterComponent } from '../sorter/sorter.component';
 
 @Component({
   selector: 'app-post-list',
-  imports: [PostItemComponent, SearchBarComponent, FilteringSidebarComponent],
+  imports: [
+    PostItemComponent,
+    SearchBarComponent,
+    FilteringSidebarComponent,
+    SorterComponent,
+  ],
   templateUrl: './post-list.component.html',
   styleUrl: './post-list.component.scss',
 })
