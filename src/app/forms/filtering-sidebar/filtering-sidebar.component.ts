@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { TranslatePipe } from '@ngx-translate/core';
 import { CategoryFilterComponent } from '../category-filter/category-filter.component';
-import { CitySelectComponent } from '../../cities/city-select/city-select.component';
+import { CityFilterComponent } from '../../cities/city-filter/city-filter.component';
 import { ExpiryFilterComponent } from '../../posts/expiry-filter/expiry-filter.component';
 
 @Component({
@@ -9,7 +9,7 @@ import { ExpiryFilterComponent } from '../../posts/expiry-filter/expiry-filter.c
   imports: [
     TranslatePipe,
     CategoryFilterComponent,
-    CitySelectComponent,
+    CityFilterComponent,
     ExpiryFilterComponent,
   ],
   templateUrl: './filtering-sidebar.component.html',

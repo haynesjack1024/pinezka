@@ -7,12 +7,12 @@ import { City } from '../models';
 import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
-  selector: 'app-city-select',
+  selector: 'app-city-filter',
   imports: [ReactiveFormsModule, TranslatePipe],
-  templateUrl: './city-select.component.html',
-  styleUrl: './city-select.component.scss',
+  templateUrl: './city-filter.component.html',
+  styleUrl: './city-filter.component.scss',
 })
-export class CitySelectComponent implements OnInit {
+export class CityFilterComponent implements OnInit {
   protected cities: City[] = [];
   protected formControl: FormControl<string | null> = new FormControl<
     string | null
