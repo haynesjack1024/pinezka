@@ -6,4 +6,4 @@ from . import models
 class CitySerializer(serializers.ModelSerializer):
     class Meta:
         model = models.City
-        fields = "__all__"
+        fields = ["name"]
