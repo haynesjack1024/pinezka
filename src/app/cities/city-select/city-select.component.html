@@ -1,6 +1,10 @@
-<select [formControl]="formControl">
-  <option [ngValue]="null"></option>
-  @for (city of cities; track city.name) {
-    <option [ngValue]="city.name">{{ city.name }}</option>
-  }
-</select>
+<span class="title">{{ "city-filter.title" | translate }}</span>
+
+<div class="select-container">
+  <select [formControl]="formControl">
+    <option [ngValue]="null">{{ "city-filter.all-option" | translate }}</option>
+    @for (city of cities; track city.name) {
+      <option [ngValue]="city.name">{{ city.name }}</option>
+    }
+  </select>
+</div>

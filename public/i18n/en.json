@@ -53,5 +53,9 @@
     "dogs": "Dogs",
     "cats": "Cats",
     "guinea-pigs": "Guinea Pigs"
+  },
+  "city-filter": {
+    "title": "City",
+    "all-option": "All cities"
   }
 }

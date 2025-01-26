@@ -7,7 +7,12 @@
   font-family: inherit;
 }
 
-input.form-input {
+select {
+  appearance: none;
+}
+
+input.form-input,
+select {
   @include input-button-base;
 
   background-color: var(--bright);

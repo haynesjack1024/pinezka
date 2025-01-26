@@ -4,10 +4,11 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CityService } from '../city.service';
 import { City } from '../models';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-city-select',
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, TranslatePipe],
   templateUrl: './city-select.component.html',
   styleUrl: './city-select.component.scss',
 })
@@ -15,7 +16,7 @@ export class CitySelectComponent implements OnInit {
   protected cities: City[] = [];
   protected formControl: FormControl<string | null> = new FormControl<
     string | null
-  >('');
+  >(null);
 
   public constructor(
     private citiesService: CityService,
