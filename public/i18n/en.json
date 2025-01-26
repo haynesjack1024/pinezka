@@ -57,5 +57,8 @@
   "city-filter": {
     "title": "City",
     "all-option": "All cities"
+  },
+  "expiry-filter": {
+    "title": "Expired"
   }
 }

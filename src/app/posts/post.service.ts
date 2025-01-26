@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { Post } from './models';
+import { ApiPost, Post } from './models';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -12,6 +12,15 @@ export class PostService {
   public constructor(private httpClient: HttpClient) {}
 
   public getPosts(): Observable<Post[]> {
-    return this.httpClient.get<Post[]>(this.url);
+    return this.httpClient.get<ApiPost[]>(this.url).pipe(
+      map((posts): Post[] =>
+        posts.map((post) => ({
+          ...post,
+          expiry: new Date(post.expiry),
+          created: new Date(post.created),
+          modified: new Date(post.modified),
+        })),
+      ),
+    );
   }
 }

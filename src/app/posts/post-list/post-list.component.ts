@@ -32,6 +32,7 @@ export class PostListComponent implements OnInit {
         this.filterPostsByCategory(),
         this.filterPostsByText(),
         this.filterPostsByCity(),
+        this.filterPostsByExpiry(),
         takeUntilDestroyed(this.destroyRef),
       )
       .subscribe((posts) => (this.posts = posts));
@@ -88,6 +89,20 @@ export class PostListComponent implements OnInit {
       ]).pipe(
         map(([posts, city]) =>
           city ? posts.filter((post) => post.city === city) : posts,
+        ),
+      );
+  }
+
+  private filterPostsByExpiry() {
+    return (posts$: Observable<Post[]>): Observable<Post[]> =>
+      combineLatest([
+        posts$,
+        this.route.queryParamMap.pipe(
+          map((params) => params.get('expired') === 'true'),
+        ),
+      ]).pipe(
+        map(([posts, expired]) =>
+          posts.filter((post) => new Date() > post.expiry === expired),
         ),
       );
   }
