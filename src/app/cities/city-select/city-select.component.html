@@ -1,0 +1,6 @@
+<select [formControl]="formControl">
+  <option [ngValue]="null"></option>
+  @for (city of cities; track city.name) {
+    <option [ngValue]="city.name">{{ city.name }}</option>
+  }
+</select>

@@ -31,6 +31,7 @@ export class PostListComponent implements OnInit {
       .pipe(
         this.filterPostsByCategory(),
         this.filterPostsByText(),
+        this.filterPostsByCity(),
         takeUntilDestroyed(this.destroyRef),
       )
       .subscribe((posts) => (this.posts = posts));
@@ -75,6 +76,18 @@ export class PostListComponent implements OnInit {
       ]).pipe(
         map(([posts, search]) =>
           search.length ? posts.filter(predicate(search)) : posts,
+        ),
+      );
+  }
+
+  private filterPostsByCity() {
+    return (posts$: Observable<Post[]>): Observable<Post[]> =>
+      combineLatest([
+        posts$,
+        this.route.queryParamMap.pipe(map((params) => params.get('city'))),
+      ]).pipe(
+        map(([posts, city]) =>
+          city ? posts.filter((post) => post.city === city) : posts,
         ),
       );
   }
