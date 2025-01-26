@@ -1,4 +1,7 @@
+from itertools import chain
+
 from django.core.exceptions import ValidationError
+from django.db import connection
 from rest_framework import exceptions, serializers
 
 from cities import models as cities_models
@@ -15,16 +18,38 @@ class PostCategoryTinySerializer(serializers.ModelSerializer):
 
 class PostCategorySerializer(serializers.ModelSerializer):
     subcategories = PostCategoryTinySerializer(many=True, read_only=True)
+    children = serializers.SerializerMethodField()
 
     class Meta:
         model = models.PostCategory
-        fields = ["id", "parent", "name", "subcategories"]
+        fields = ["id", "parent", "children", "name", "subcategories"]
 
     def validate(self, attrs):
         try:
             models.PostCategory.validate_is_unique(attrs["name"], attrs["parent"])
         except ValidationError as e:
             raise exceptions.ValidationError(e.message % e.params, e.code)
+
+    def get_children(self, category: "models.PostCategory") -> list[int]:
+        with connection.cursor() as cursor:
+            cursor.execute(
+                """
+                WITH RECURSIVE cte AS (
+                    SELECT
+                        1 as n,
+                        %s as id
+                    UNION
+                    SELECT
+                        n + 1,
+                        posts_postcategory.id
+                    FROM cte JOIN posts_postcategory ON cte.id=posts_postcategory.parent_id
+                )
+                SELECT id FROM cte WHERE n > 1;
+                """,
+                [category.id],
+            )
+            children = list(chain(*cursor.fetchall()))
+        return children
 
 
 class PostSerializer(serializers.ModelSerializer):
