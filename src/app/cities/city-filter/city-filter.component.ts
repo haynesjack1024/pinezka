@@ -5,6 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { CityService } from '../city.service';
 import { City } from '../models';
 import { TranslatePipe } from '@ngx-translate/core';
+import { first } from 'rxjs';
 
 @Component({
   selector: 'app-city-filter',
@@ -30,6 +31,12 @@ export class CityFilterComponent implements OnInit {
       .getCities()
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe((cities) => (this.cities = cities));
+
+    this.route.queryParamMap
+      .pipe(first(), takeUntilDestroyed(this.destroyRef))
+      .subscribe((params) =>
+        this.formControl.setValue(params.get('city'), { emitEvent: false }),
+      );
 
     this.formControl.valueChanges
       .pipe(takeUntilDestroyed(this.destroyRef))
