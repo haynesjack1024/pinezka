@@ -39,6 +39,7 @@ export class PostListComponent implements OnInit {
         this.filterPostsByText(),
         this.filterPostsByCity(),
         this.filterPostsByExpiry(),
+        this.sortPosts(),
         takeUntilDestroyed(this.destroyRef),
       )
       .subscribe((posts) => (this.posts = posts));
@@ -110,6 +111,32 @@ export class PostListComponent implements OnInit {
         map(([posts, expired]) =>
           posts.filter((post) => new Date() > post.expiry === expired),
         ),
+      );
+  }
+
+  private sortPosts() {
+    const alphaSort = (a: Post, b: Post): number =>
+      a.title.localeCompare(b.title);
+    const modifiedSort = (a: Post, b: Post): number =>
+      a.modified.valueOf() - b.modified.valueOf();
+
+    return (posts$: Observable<Post[]>): Observable<Post[]> =>
+      combineLatest([
+        posts$,
+        this.route.queryParamMap.pipe(map((params) => params.get('sorting'))),
+      ]).pipe(
+        map(([posts, sorting]) => {
+          switch (sorting) {
+            case 'alpha':
+              posts.sort(alphaSort);
+              break;
+            case 'modified':
+              posts.sort(modifiedSort);
+              break;
+          }
+
+          return posts;
+        }),
       );
   }
 }
