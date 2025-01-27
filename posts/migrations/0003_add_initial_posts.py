@@ -59,9 +59,9 @@ INITIAL_POSTS = [
         "author_id": 1,
         "title": "Full-time Software Developer Position in Warsaw",
         "content": "Join our fast-growing tech company! We’re looking for a talented full-time software developer with experience in Python, Django, and front-end technologies. Great benefits and team atmosphere.",
-        "created": "2025-01-28T09:00:00+00:00",
-        "modified": "2025-01-28T09:30:00+00:00",
-        "expiry": "2025-02-28T09:00:00+00:00",
+        "created": "2025-01-03T09:00:00+00:00",
+        "modified": "2025-01-03T09:30:00+00:00",
+        "expiry": "2025-01-20T09:00:00+00:00",
     },
 ]
 
