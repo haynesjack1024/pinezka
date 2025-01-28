@@ -10,6 +10,14 @@ from user_management.serializers import UserSerializer
 from . import models
 
 
+class PostCategoryFullNameSerializer(serializers.ModelSerializer):
+    full_name = serializers.CharField(source="__str__")
+
+    class Meta:
+        model = models.PostCategory
+        fields = ["id", "full_name"]
+
+
 class PostCategoryTinySerializer(serializers.ModelSerializer):
     class Meta:
         model = models.PostCategory
