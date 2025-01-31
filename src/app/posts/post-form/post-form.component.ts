@@ -12,7 +12,7 @@ import { TextareaComponent } from '../../forms/textarea/textarea.component';
 import { PostService } from '../post.service';
 import { TranslatedToastrService } from '../../translated-toastr.service';
 import { _ } from '@ngx-translate/core';
-import { ExpiryInputComponent } from '../../forms/expiry-input/expiry-input.component';
+import { ExpiryInputComponent } from '../expiry/expiry-input/expiry-input.component';
 
 @Component({
   selector: 'app-post-form',

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AbstractInputDirective } from '../abstract-input/abstract-input.directive';
+import { AbstractInputDirective } from '../../../forms/abstract-input/abstract-input.directive';
 import { AsyncPipe } from '@angular/common';
 import {
   AbstractControl,
