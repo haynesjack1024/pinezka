@@ -3,19 +3,32 @@
   "post": {
     "created-label": "Added",
     "expiry-label": "Expires",
-    "modified-label": "Last modified"
+    "modified-label": "Last modified",
+    "add-success": "New post added successfully",
+    "add-failure": "Failed to add new post, please check form errors"
   },
   "form": {
     "error": {
       "required": "This field is required",
-      "minlength": "Minimum length {{requiredLength}}",
-      "maxlength": "Maximum length {{requiredLength}}",
-      "email": "Invalid email address"
+      "minlength": "Minimum length is {{requiredLength}} characters",
+      "maxlength": "Maximum length is {{requiredLength}} characters",
+      "email": "Invalid email address",
+      "min": "Minimum value is {{min}}",
+      "expiry-input": {
+        "min": "Expiry cannot be earlier than now",
+        "max": "Cannot set a post's expiry later than 6 months from now"
+      }
     },
     "label": {
       "username": "Username",
       "password": "Password",
-      "login": "Sign In"
+      "login": "Sign In",
+      "city": "City",
+      "category": "Category",
+      "title": "Title",
+      "content": "Content",
+      "add-post": "Add Post",
+      "expiry": "Expires at"
     }
   },
   "login": {
@@ -29,7 +42,9 @@
   "navbar": {
     "login": "Sign In",
     "logout": "Sign Out",
-    "settings": "Account Settings"
+    "settings": "Account Settings",
+    "add-post": "Add post",
+    "all-posts": "All posts"
   },
   "filtering-sidebar-title": "Filtering",
   "category-filter": {

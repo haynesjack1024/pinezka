@@ -1,9 +1,14 @@
-<app-filtering-sidebar class="left-column" />
-<div class="center-column">
-  <app-search-bar />
-  <app-sorter />
+<app-filtering-sidebar />
+<div class="main">
+  <div class="col">
+    <app-search-bar />
+    <app-sorter />
 
-  @for (post of posts; track post.id) {
-    <app-post-item [post]="post" />
-  }
+    @for (post of posts; track post.id) {
+      <app-post-item [post]="post" />
+    }
+  </div>
+  <div class="col">
+    <router-outlet></router-outlet>
+  </div>
 </div>

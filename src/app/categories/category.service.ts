@@ -1,9 +1,15 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { map, mergeMap, Observable, shareReplay } from 'rxjs';
-import { CurrentCategory, SimpleCategory } from './models';
+import { map, mergeMap, Observable, shareReplay, combineLatest } from 'rxjs';
+import {
+  ApiFullCategory,
+  CurrentCategory,
+  FullCategory,
+  SimpleCategory,
+} from './models';
 import { ActivatedRoute } from '@angular/router';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { TranslateService } from '@ngx-translate/core';
 
 @Injectable({
   providedIn: 'root',
@@ -16,6 +22,7 @@ export class CategoryService {
   public constructor(
     private http: HttpClient,
     private route: ActivatedRoute,
+    private translate: TranslateService,
   ) {
     this.currentCategory = this.route.queryParamMap.pipe(
       map((params) => {
@@ -50,5 +57,30 @@ export class CategoryService {
 
   public getCurrentCategory(): Observable<CurrentCategory> {
     return this.currentCategory;
+  }
+
+  public getAllCategories(): Observable<FullCategory[]> {
+    return this.http.get<ApiFullCategory[]>(this.url + 'all/').pipe(
+      mergeMap((categories) =>
+        combineLatest(
+          categories.map((category) =>
+            combineLatest(
+              category.full_name
+                .split('>')
+                .map((token) =>
+                  this.translate.stream('category.' + token.trim()),
+                ),
+            ).pipe(
+              map(
+                (tokens): FullCategory => ({
+                  id: category.id,
+                  fullName: tokens.join(' > '),
+                }),
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
   }
 }

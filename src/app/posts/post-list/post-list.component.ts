@@ -5,7 +5,7 @@ import { PostItemComponent } from '../post-item/post-item.component';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { SearchBarComponent } from '../search-bar/search-bar.component';
 import { FilteringSidebarComponent } from '../filtering-sidebar/filtering-sidebar.component';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, RouterOutlet } from '@angular/router';
 import { combineLatest, map, Observable } from 'rxjs';
 import { CategoryService } from '../../categories/category.service';
 import { SorterComponent } from '../sorter/sorter.component';
@@ -17,6 +17,7 @@ import { SorterComponent } from '../sorter/sorter.component';
     SearchBarComponent,
     FilteringSidebarComponent,
     SorterComponent,
+    RouterOutlet,
   ],
   templateUrl: './post-list.component.html',
   styleUrl: './post-list.component.scss',
@@ -118,7 +119,7 @@ export class PostListComponent implements OnInit {
     const alphaSort = (a: Post, b: Post): number =>
       a.title.localeCompare(b.title);
     const modifiedSort = (a: Post, b: Post): number =>
-      a.modified.valueOf() - b.modified.valueOf();
+      b.modified.valueOf() - a.modified.valueOf();
 
     return (posts$: Observable<Post[]>): Observable<Post[]> =>
       combineLatest([

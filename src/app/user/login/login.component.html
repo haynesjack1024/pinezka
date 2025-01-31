@@ -1,12 +1,14 @@
 <form [formGroup]="formGroup" (ngSubmit)="submit()">
   <app-input
+    name="username"
     [label]="'form.label.username' | translate"
-    controlName="username"
+    formControlName="username"
   />
   <app-input
     type="password"
+    name="password"
     [label]="'form.label.password' | translate"
-    controlName="password"
+    formControlName="password"
   />
   <input type="submit" [value]="'form.label.login' | translate" />
 </form>

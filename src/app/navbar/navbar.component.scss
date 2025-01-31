@@ -22,6 +22,19 @@
   display: flex;
   column-gap: 1.25rem;
   align-items: center;
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  a:hover {
+    text-decoration: underline;
+  }
+}
+
+.navbar > .navbar-items-container:nth-child(2) {
+  column-gap: 5rem;
 }
 
 .user-dropdown-button {

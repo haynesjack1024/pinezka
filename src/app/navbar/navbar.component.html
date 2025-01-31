@@ -6,6 +6,16 @@
   </div>
 
   <div class="navbar-items-container">
+    <a routerLink="/posts" queryParamsHandling="preserve">
+      {{ "navbar.all-posts" | translate }}
+    </a>
+
+    <a routerLink="/posts/form" queryParamsHandling="preserve">
+      {{ "navbar.add-post" | translate }}
+    </a>
+  </div>
+
+  <div class="navbar-items-container">
     <app-chip class="outline">{{ user?.username }}</app-chip>
     <button (click)="onBarsClick()" class="user-dropdown-button">
       <fa-icon [icon]="faBars" />

@@ -1,12 +1,22 @@
 import { DestroyRef, Directive, inject, OnInit } from '@angular/core';
 import {
+  AbstractControl,
+  ControlEvent,
   ControlValueAccessor,
   FormControl,
   NgControl,
+  StatusChangeEvent,
   TouchedChangeEvent,
 } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
-import { filter, Observable, of, switchMap, tap } from 'rxjs';
+import {
+  BehaviorSubject,
+  filter,
+  Observable,
+  of,
+  Subscription,
+  tap,
+} from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 type OnTouchedFn = () => void;
@@ -24,7 +34,14 @@ export abstract class AbstractInputDirective
     return;
   };
 
-  protected error$?: Observable<string>;
+  protected readonly errorTranslationPrefix: string = '';
+  protected readonly customErrorTranslations: string[] = [];
+  private readonly lastError$ = new BehaviorSubject<string>('');
+  private lastErrorTranslationSub?: Subscription;
+
+  protected get error$(): Observable<string> {
+    return this.lastError$.asObservable();
+  }
 
   protected readonly ngControl = inject(NgControl);
   protected readonly translate = inject(TranslateService);
@@ -32,36 +49,71 @@ export abstract class AbstractInputDirective
 
   public constructor() {
     this.ngControl.valueAccessor = this;
+
+    if (this.customErrorTranslations.length && !this.errorTranslationPrefix) {
+      throw new Error(
+        'AbstractInputDirective: Improperly extended, ' +
+          'provided customErrorTranslations without errorTranslationPrefix',
+      );
+    }
   }
 
   public ngOnInit(): void {
     this.formControl.events
       .pipe(
         filter((event) => event instanceof TouchedChangeEvent && event.touched),
-        tap(this.onTouched),
+        tap(() => this.onTouched()),
         takeUntilDestroyed(this.destroyRef),
       )
       .subscribe();
 
     this.formControl.valueChanges
-      .pipe(tap(this.onChange), takeUntilDestroyed(this.destroyRef))
+      .pipe(
+        tap((value) => this.onChange(value)),
+        takeUntilDestroyed(this.destroyRef),
+      )
       .subscribe();
 
-    this.error$ = this.ngControl.control?.statusChanges.pipe(
-      switchMap(() => this.getControlError()),
+    this.ngControl.control?.events
+      .pipe(
+        filter(
+          (event) =>
+            event instanceof TouchedChangeEvent ||
+            event instanceof StatusChangeEvent,
+        ),
+        tap((event: ControlEvent) => this.setLastError(event.source)),
+        takeUntilDestroyed(this.destroyRef),
+      )
+      .subscribe();
+  }
+
+  private setLastError(control: AbstractControl): void {
+    this.lastErrorTranslationSub?.unsubscribe();
+    this.lastErrorTranslationSub = this.getLastErrorTranslation(
+      control,
+    ).subscribe((translation) => this.lastError$.next(translation));
+  }
+
+  private getLastErrorTranslation(
+    control: AbstractControl,
+  ): Observable<string> {
+    if (!control.errors || control.untouched) {
+      return of('');
+    }
+    const [key, error] = Object.entries(control.errors)[0] as [string, unknown];
+
+    return this.translate.stream(
+      `form.error.${this.getErrorTranslationKey(key)}`,
+      error ?? {},
     );
   }
 
-  private getControlError(): Observable<string> {
-    if (!this.ngControl.errors || this.formControl.pristine) {
-      return of('');
+  private getErrorTranslationKey(errorName: string): string {
+    if (!this.customErrorTranslations.includes(errorName)) {
+      return errorName;
     }
-    const [key, error] = Object.entries(this.ngControl.errors)[0] as [
-      string,
-      unknown,
-    ];
 
-    return this.translate.stream(`form.error.${key}`, error ?? {});
+    return this.errorTranslationPrefix + '.' + errorName;
   }
 
   public writeValue(value: string): void {

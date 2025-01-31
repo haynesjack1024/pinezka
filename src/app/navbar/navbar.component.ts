@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { TranslatePipe } from '@ngx-translate/core';
-import { RouterOutlet } from '@angular/router';
+import { RouterLink, RouterOutlet } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { logout } from '../user/store/actions';
 import { Observable } from 'rxjs';
@@ -22,6 +22,7 @@ import { ChipComponent } from '../chip/chip.component';
     ChipComponent,
     TranslatePipe,
     UpperCasePipe,
+    RouterLink,
   ],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.scss',

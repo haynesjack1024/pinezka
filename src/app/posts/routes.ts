@@ -8,11 +8,19 @@ export const postRoutes: Routes = [
     children: [
       {
         path: '',
-        pathMatch: 'full',
         loadComponent: () =>
           import('./post-list/post-list.component').then(
             (c) => c.PostListComponent,
           ),
+        children: [
+          {
+            path: 'form',
+            loadComponent: () =>
+              import('./post-form/post-form.component').then(
+                (c) => c.PostFormComponent,
+              ),
+          },
+        ],
       },
     ],
   },

@@ -3,22 +3,37 @@
   width: 100%;
 
   display: grid;
-  grid-template-columns: 1fr min(60%, 37rem) 1fr;
+  grid-template-columns: 1fr 3fr 1fr;
   align-items: start;
-  gap: 1rem;
+  gap: 4rem;
 
   padding: 1rem;
+
+  &:has(.col:nth-child(2) > :last-child:nth-child(2)) {
+    grid-template-columns: min-content 1fr;
+  }
 }
 
-.left-column {
+app-filtering-sidebar {
   justify-self: left;
 }
 
-.center-column {
-  justify-self: center;
-  width: 100%;
+.main {
+  display: flex;
+  justify-content: space-evenly;
+  gap: 4rem;
+}
 
+.col {
+  width: min(100%, 37rem);
   display: flex;
   flex-direction: column;
-  row-gap: 1rem;
+
+  &:first-child {
+    row-gap: 1rem;
+  }
+
+  &:has(> :last-child:nth-child(1)) {
+    display: none;
+  }
 }

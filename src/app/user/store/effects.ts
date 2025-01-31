@@ -82,8 +82,8 @@ export const loginUser = createEffect(
   (actions$ = inject(Actions), userService = inject(UserService)) =>
     actions$.pipe(
       ofType(login),
-      exhaustMap((loginDetails) =>
-        userService.login(loginDetails).pipe(
+      exhaustMap(({ username, password }) =>
+        userService.login({ username, password }).pipe(
           map((user) => userApiActions.userLoginSucceeded(user)),
           catchError(() => of(userApiActions.userLoginFailed())),
         ),

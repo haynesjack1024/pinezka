@@ -12,7 +12,8 @@ select {
 }
 
 input.form-input,
-select {
+select,
+textarea {
   @include input-button-base;
 
   background-color: var(--bright);
@@ -23,6 +24,10 @@ select {
     outline: var(--border-medium) solid var(--accent);
     outline-offset: var(--border-thin-neg);
   }
+}
+
+textarea {
+  resize: none;
 }
 
 input[type="submit"],
@@ -36,10 +41,15 @@ button {
   box-shadow: var(--medium-box-shadow);
   transition: box-shadow 0.15s ease;
   height: fit-content;
+  width: fit-content;
 
   &:hover,
   &:focus-visible {
     box-shadow: var(--heavy-box-shadow);
+  }
+
+  &:hover {
+    cursor: pointer;
   }
 
   &:active {

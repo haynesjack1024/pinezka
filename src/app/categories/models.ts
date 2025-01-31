@@ -33,3 +33,24 @@ export interface CurrentCategory {
    */
   readonly subcategories: SimpleCategory[];
 }
+
+/**
+ * Category with a full name including all it's ancestors.
+ */
+export interface ApiFullCategory {
+  /** This category's ID. */
+  readonly id: number;
+  /** This category's full name. */
+  // eslint-disable-next-line @typescript-eslint/naming-convention
+  readonly full_name: string;
+}
+
+/**
+ * Category with a full name including all it's ancestors.
+ */
+export interface FullCategory {
+  /** This category's ID. */
+  readonly id: number;
+  /** This category's full name. */
+  readonly fullName: string;
+}
