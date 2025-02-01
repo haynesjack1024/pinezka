@@ -1,0 +1,15 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  row-gap: 2.5rem;
+
+  background-color: var(--bright);
+  border-radius: var(--border-radius-standard);
+  box-shadow: var(--light-box-shadow);
+  padding: 2rem;
+}
+
+.title {
+  font-weight: 500;
+  font-size: 1.25rem;
+}

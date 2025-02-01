@@ -1,0 +1,12 @@
+<label>
+  {{ "form.label.expiry" | translate }}
+  <input
+    class="form-input"
+    type="date"
+    name="expiry"
+    [formControl]="formControl"
+    [min]="minDisplay"
+    [max]="maxDisplay"
+  />
+</label>
+<div class="error">{{ error$ | async }}</div>

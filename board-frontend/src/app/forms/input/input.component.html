@@ -1,0 +1,10 @@
+<label>
+  {{ label }}
+  <input
+    class="form-input"
+    [type]="type"
+    [name]="name"
+    [formControl]="formControl"
+  />
+</label>
+<div class="error">{{ error$ | async }}</div>

@@ -1,0 +1,84 @@
+{
+  "website-name": "pinezka",
+  "post": {
+    "created-label": "Added",
+    "expiry-label": "Expires",
+    "modified-label": "Last modified",
+    "add-success": "New post added successfully",
+    "add-failure": "Failed to add new post, please check form errors"
+  },
+  "form": {
+    "error": {
+      "required": "This field is required",
+      "minlength": "Minimum length is {{requiredLength}} characters",
+      "maxlength": "Maximum length is {{requiredLength}} characters",
+      "email": "Invalid email address",
+      "min": "Minimum value is {{min}}",
+      "expiry-input": {
+        "min": "Expiry cannot be earlier than now",
+        "max": "Cannot set a post's expiry later than 6 months from now"
+      }
+    },
+    "label": {
+      "username": "Username",
+      "password": "Password",
+      "login": "Sign In",
+      "city": "City",
+      "category": "Category",
+      "title": "Title",
+      "content": "Content",
+      "add-post": "Add Post",
+      "expiry": "Expires at"
+    }
+  },
+  "login": {
+    "success": "Successfully signed in",
+    "failure": "Failed to sign in"
+  },
+  "logout": {
+    "success": "Successfully signed out",
+    "failure": "Failed to sign out"
+  },
+  "navbar": {
+    "login": "Sign In",
+    "logout": "Sign Out",
+    "settings": "Account Settings",
+    "add-post": "Add post",
+    "all-posts": "All posts"
+  },
+  "filtering-sidebar-title": "Filtering",
+  "category-filter": {
+    "title": "Category",
+    "current": "CURRENT",
+    "previous": "GO BACK"
+  },
+  "category": {
+    "properties": "Properties",
+    "flats": "Flats",
+    "real-estate": "Real Estate",
+    "sell": "Sell",
+    "rent": "Rent",
+    "job-offers": "Job Offers",
+    "full-time": "Full Time",
+    "part-time": "Part Time",
+    "cars": "Cars",
+    "services": "Services",
+    "electronics": "Electronics",
+    "animals": "Animals",
+    "dogs": "Dogs",
+    "cats": "Cats",
+    "guinea-pigs": "Guinea Pigs"
+  },
+  "city-filter": {
+    "title": "City",
+    "all-option": "All cities"
+  },
+  "expiry-filter": {
+    "title": "Expired"
+  },
+  "sorting": {
+    "alpha": "Alphabetically",
+    "modified": "By last modification date",
+    "view-count": "By view count"
+  }
+}

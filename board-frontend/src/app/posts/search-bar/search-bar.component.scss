@@ -1,0 +1,21 @@
+:host {
+  display: flex;
+  background-color: var(--bright);
+  border-radius: 3rem;
+  padding: var(--padding-input) 1rem;
+  box-shadow: var(--light-box-shadow);
+  width: 100%;
+  box-sizing: border-box;
+
+  &:focus-within {
+    outline: var(--border-medium) solid var(--accent);
+    outline-offset: var(--border-thin-neg);
+  }
+}
+
+input {
+  background-color: transparent;
+  border: none;
+  outline: none;
+  flex: 1;
+}
