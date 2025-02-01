@@ -11,11 +11,14 @@ from . import models
 
 
 class PostCategoryFullNameSerializer(serializers.ModelSerializer):
-    full_name = serializers.CharField(source="__str__")
+    full_name = serializers.SerializerMethodField()
 
     class Meta:
         model = models.PostCategory
         fields = ["id", "full_name"]
+
+    def get_full_name(self, obj: models.PostCategory):
+        return str(obj).split(" > ")
 
 
 class PostCategoryTinySerializer(serializers.ModelSerializer):

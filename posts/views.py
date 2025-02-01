@@ -12,6 +12,7 @@ class PostCategoryViewSet(AutoPermissionViewSetMixin, viewsets.ModelViewSet):
     permission_type_map = {
         **AutoPermissionViewSetMixin.permission_type_map,
         "all": None,
+        "full_name": "view",
     }
 
     def get_queryset(self):
@@ -23,13 +24,17 @@ class PostCategoryViewSet(AutoPermissionViewSetMixin, viewsets.ModelViewSet):
     def get_serializer_class(self):
         if self.action == "list":
             return serializers.PostCategoryTinySerializer
-        if self.action == "all":
+        if self.action in ["all", "full_name"]:
             return serializers.PostCategoryFullNameSerializer
         return super().get_serializer_class()
 
     @action(detail=False)
-    def all(self, request):
-        return self.list(request)
+    def all(self, request, *args, **kwargs):
+        return self.list(request, *args, **kwargs)
+
+    @action(detail=True)
+    def full_name(self, request, *args, **kwargs):
+        return self.retrieve(request, *args, **kwargs)
 
 
 class PostViewSet(AutoPermissionViewSetMixin, viewsets.ModelViewSet):
