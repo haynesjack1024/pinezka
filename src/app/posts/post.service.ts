@@ -24,6 +24,12 @@ export class PostService {
     this.postsRefresh$.next();
   }
 
+  public getPost(id: number): Observable<Post> {
+    return this.httpClient
+      .get<PostResponse>(`${this.url}${id}/`)
+      .pipe(map((post) => this.parsePostResponse(post)));
+  }
+
   public addPost(post: Partial<PostRequest>): Observable<Post> {
     return this.httpClient
       .post<PostResponse>(this.url, {

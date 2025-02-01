@@ -20,6 +20,13 @@ export const postRoutes: Routes = [
                 (c) => c.PostFormComponent,
               ),
           },
+          {
+            path: ':id',
+            loadComponent: () =>
+              import('./post-details/post-details.component').then(
+                (c) => c.PostDetailsComponent,
+              ),
+          },
         ],
       },
     ],

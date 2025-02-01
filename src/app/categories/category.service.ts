@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { map, mergeMap, Observable, shareReplay, combineLatest } from 'rxjs';
+import { map, Observable, shareReplay, combineLatest, switchMap } from 'rxjs';
 import {
   ApiFullCategory,
   CurrentCategory,
@@ -32,7 +32,7 @@ export class CategoryService {
           ? parseInt(categoryId)
           : null;
       }),
-      mergeMap(
+      switchMap(
         (categoryId): Observable<CurrentCategory> =>
           categoryId !== null
             ? this.getCategory(categoryId)
@@ -61,15 +61,13 @@ export class CategoryService {
 
   public getAllCategories(): Observable<FullCategory[]> {
     return this.http.get<ApiFullCategory[]>(this.url + 'all/').pipe(
-      mergeMap((categories) =>
+      switchMap((categories) =>
         combineLatest(
           categories.map((category) =>
             combineLatest(
-              category.full_name
-                .split('>')
-                .map((token) =>
-                  this.translate.stream('category.' + token.trim()),
-                ),
+              category.full_name.map((token) =>
+                this.translate.stream('category.' + token.trim()),
+              ),
             ).pipe(
               map(
                 (tokens): FullCategory => ({
@@ -82,5 +80,19 @@ export class CategoryService {
         ),
       ),
     );
+  }
+
+  public getCategoryFullName(categoryId: number): Observable<string[]> {
+    return this.http
+      .get<ApiFullCategory>(`${this.url}${categoryId}/full_name/`)
+      .pipe(
+        switchMap((category) =>
+          combineLatest(
+            category.full_name.map((token) =>
+              this.translate.stream('category.' + token.trim()),
+            ),
+          ),
+        ),
+      );
   }
 }

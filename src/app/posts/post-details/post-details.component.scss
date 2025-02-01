@@ -1,0 +1,57 @@
+:host {
+  background-color: var(--bright);
+  padding: 1.75rem;
+  border-radius: var(--border-radius-standard);
+  box-shadow: var(--light-box-shadow);
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+
+  &:first-child {
+    margin-bottom: 0.15rem;
+  }
+}
+
+.category {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.tag {
+  color: var(--secondary);
+  text-transform: uppercase;
+  font-weight: 500;
+  font-size: 0.85rem;
+}
+
+.username {
+  color: var(--accent);
+  font-size: 1.1rem;
+  width: 25%;
+  text-align: right;
+}
+
+.title {
+  font-size: 1.25rem;
+  width: 75%;
+  margin-bottom: 0.5rem;
+}
+
+.datetimes {
+  display: grid;
+  grid-template-columns: max-content max-content;
+  gap: 0.4rem 1.5rem;
+  color: var(--secondary);
+
+  :nth-child(2n) {
+    justify-self: right;
+  }
+}
+
+.content {
+  line-height: 1.5rem;
+  letter-spacing: 0.03rem;
+}

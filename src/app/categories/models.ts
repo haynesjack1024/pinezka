@@ -42,7 +42,7 @@ export interface ApiFullCategory {
   readonly id: number;
   /** This category's full name. */
   // eslint-disable-next-line @typescript-eslint/naming-convention
-  readonly full_name: string;
+  readonly full_name: string[];
 }
 
 /**

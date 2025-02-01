@@ -10,6 +10,12 @@
   border-radius: var(--border-radius-standard);
   padding: 1rem;
   width: 100%;
+
+  &:hover {
+    cursor: pointer;
+    outline: var(--border-medium) solid var(--accent);
+    outline-offset: var(--border-medium-neg);
+  }
 }
 
 .title {

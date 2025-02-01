@@ -1,0 +1,33 @@
+<div class="header">
+  <div class="category tag">
+    @for (token of category; track token) {
+      <span>{{ token }}</span>
+      @if (!$last) {
+        <fa-icon [icon]="faCaretRight" />
+      }
+    }
+  </div>
+  <span class="tag">{{ post?.city }}</span>
+</div>
+
+<div class="header">
+  <div>
+    <div class="title">{{ post?.title }}</div>
+    <div class="datetimes">
+      <span>{{ "post.modified-label" | translate }}</span>
+      <span>{{ post?.modified | date: "short" }}</span>
+
+      <span>{{ "post.created-label" | translate }}</span>
+      <span>{{ post?.created | date: "short" }}</span>
+
+      <span>{{ "post.expiry-label" | translate }}</span>
+      <span>{{ post?.expiry | date: "short" }}</span>
+    </div>
+  </div>
+
+  <span class="username">{{ post?.author?.username }}</span>
+</div>
+
+<div class="content">
+  {{ post?.content }}
+</div>

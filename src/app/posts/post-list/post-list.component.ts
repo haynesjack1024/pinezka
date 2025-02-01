@@ -5,10 +5,11 @@ import { PostItemComponent } from '../post-item/post-item.component';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { SearchBarComponent } from '../search-bar/search-bar.component';
 import { FilteringSidebarComponent } from '../filtering-sidebar/filtering-sidebar.component';
-import { ActivatedRoute, RouterOutlet } from '@angular/router';
+import { ActivatedRoute, RouterLink, RouterOutlet } from '@angular/router';
 import { combineLatest, map, Observable } from 'rxjs';
 import { CategoryService } from '../../categories/category.service';
 import { SorterComponent } from '../sorter/sorter.component';
+import { ViewportScroller } from '@angular/common';
 
 @Component({
   selector: 'app-post-list',
@@ -18,6 +19,7 @@ import { SorterComponent } from '../sorter/sorter.component';
     FilteringSidebarComponent,
     SorterComponent,
     RouterOutlet,
+    RouterLink,
   ],
   templateUrl: './post-list.component.html',
   styleUrl: './post-list.component.scss',
@@ -29,6 +31,7 @@ export class PostListComponent implements OnInit {
     private postService: PostService,
     private categoryService: CategoryService,
     private route: ActivatedRoute,
+    private scroll: ViewportScroller,
     private destroyRef: DestroyRef,
   ) {}
 
@@ -139,5 +142,9 @@ export class PostListComponent implements OnInit {
           return posts;
         }),
       );
+  }
+
+  protected onItemClick(): void {
+    this.scroll.scrollToPosition([0, 0]);
   }
 }

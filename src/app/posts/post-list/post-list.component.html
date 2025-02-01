@@ -5,7 +5,12 @@
     <app-sorter />
 
     @for (post of posts; track post.id) {
-      <app-post-item [post]="post" />
+      <app-post-item
+        routerLink="./{{ post.id }}"
+        queryParamsHandling="preserve"
+        (click)="onItemClick()"
+        [post]="post"
+      />
     }
   </div>
   <div class="col">
