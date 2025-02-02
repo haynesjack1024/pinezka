@@ -12,5 +12,5 @@
     [label]="'form.label.content' | translate"
   />
   <app-expiry-input formControlName="expiry" />
-  <input type="submit" value="{{ 'form.label.add-post' | translate }}" />
+  <input type="submit" [value]="submitLabel | async" />
 </form>

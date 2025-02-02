@@ -143,8 +143,4 @@ export class PostListComponent implements OnInit {
         }),
       );
   }
-
-  protected onItemClick(): void {
-    this.scroll.scrollToPosition([0, 0]);
-  }
 }

@@ -5,7 +5,9 @@
     "expiry-label": "Expires",
     "modified-label": "Last modified",
     "add-success": "New post added successfully",
-    "add-failure": "Failed to add new post, please check form errors"
+    "add-failure": "Failed to add new post, please check form errors",
+    "edit-success": "Changes saved successfully",
+    "edit-failure": "Failed to save changes, please check form errors"
   },
   "form": {
     "error": {
@@ -28,6 +30,8 @@
       "title": "Title",
       "content": "Content",
       "add-post": "Add Post",
+      "edit-post": "Edit",
+      "save-edit-post": "Save Changes",
       "expiry": "Expires at"
     }
   },

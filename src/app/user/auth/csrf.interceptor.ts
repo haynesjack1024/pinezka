@@ -3,7 +3,10 @@ import { CookieService } from 'ngx-cookie-service';
 import { inject } from '@angular/core';
 
 export const csrfInterceptor: HttpInterceptorFn = (req, next) => {
-  if (req.method == 'POST' && req.url.startsWith('/api')) {
+  if (
+    ['POST', 'PATCH', 'DELETE'].includes(req.method) &&
+    req.url.startsWith('/api')
+  ) {
     const cookieService = inject(CookieService);
 
     return next(

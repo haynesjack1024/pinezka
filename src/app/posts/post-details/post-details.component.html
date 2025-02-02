@@ -31,3 +31,11 @@
 <div class="content">
   {{ post?.content }}
 </div>
+
+@if (post?.author?.id === (currentUser | async)?.id) {
+  <div class="buttons">
+    <button routerLink="./edit">
+      {{ "form.label.edit-post" | translate }}
+    </button>
+  </div>
+}

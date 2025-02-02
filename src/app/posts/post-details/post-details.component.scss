@@ -3,6 +3,9 @@
   padding: 1.75rem;
   border-radius: var(--border-radius-standard);
   box-shadow: var(--light-box-shadow);
+
+  position: sticky;
+  top: 1rem;
 }
 
 .header {
@@ -54,4 +57,10 @@
 .content {
   line-height: 1.5rem;
   letter-spacing: 0.03rem;
+  margin-bottom: 1rem;
+}
+
+.buttons {
+  display: flex;
+  justify-content: end;
 }

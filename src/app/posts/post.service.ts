@@ -39,6 +39,12 @@ export class PostService {
       .pipe(map((post) => this.parsePostResponse(post)));
   }
 
+  public updatePost(id: number, post: Partial<PostRequest>): Observable<Post> {
+    return this.httpClient
+      .patch<PostResponse>(`${this.url}${id}/`, post)
+      .pipe(map((post) => this.parsePostResponse(post)));
+  }
+
   private parsePostResponse(post: PostResponse): Post {
     return {
       ...post,

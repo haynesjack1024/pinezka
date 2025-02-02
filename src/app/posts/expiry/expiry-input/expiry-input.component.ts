@@ -29,8 +29,19 @@ export class ExpiryInputComponent
 
   protected readonly min: Dayjs = dayjs();
   protected readonly max: Dayjs = dayjs().add(6, 'months');
-  protected readonly minDisplay: string = this.min.format(this.dateRangeFormat);
-  protected readonly maxDisplay: string = this.max.format(this.dateRangeFormat);
+  protected readonly minDisplay: string = this.format(this.min);
+  protected readonly maxDisplay: string = this.format(this.max);
+
+  public override ngOnInit(): void {
+    super.ngOnInit();
+    this.ngControl.control?.addValidators(this.dateRangeValidator);
+  }
+
+  private format(date: Date | Dayjs): string {
+    return (date instanceof Date ? dayjs(date) : date).format(
+      this.dateRangeFormat,
+    );
+  }
 
   private dateRangeValidator = (
     (min: Dayjs, max: Dayjs) =>
@@ -47,8 +58,7 @@ export class ExpiryInputComponent
     }
   )(this.min, this.max);
 
-  public override ngOnInit(): void {
-    super.ngOnInit();
-    this.ngControl.control?.addValidators(this.dateRangeValidator);
+  public override writeValue(value: Date): void {
+    super.writeValue(this.format(dayjs(value)));
   }
 }

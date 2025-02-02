@@ -20,13 +20,13 @@ import {
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 type OnTouchedFn = () => void;
-type OnChangeFn = (value: string | null) => void;
+type OnChangeFn = (value: unknown) => void;
 
 @Directive()
 export abstract class AbstractInputDirective
   implements OnInit, ControlValueAccessor
 {
-  protected readonly formControl = new FormControl<string>('');
+  protected readonly formControl = new FormControl<unknown>(undefined);
   private onTouched: OnTouchedFn = () => {
     return;
   };
@@ -116,7 +116,7 @@ export abstract class AbstractInputDirective
     return this.errorTranslationPrefix + '.' + errorName;
   }
 
-  public writeValue(value: string): void {
+  public writeValue(value: unknown): void {
     this.formControl.setValue(value);
   }
 
