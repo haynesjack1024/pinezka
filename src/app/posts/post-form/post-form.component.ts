@@ -13,7 +13,7 @@ import { PostService } from '../post.service';
 import { TranslatedToastrService } from '../../translated-toastr.service';
 import { _ } from '@ngx-translate/core';
 import { ExpiryInputComponent } from '../expiry/expiry-input/expiry-input.component';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import {
   BehaviorSubject,
@@ -79,6 +79,7 @@ export class PostFormComponent implements OnInit {
     private translatedToastr: TranslatedToastrService,
     private translate: TranslateService,
     private route: ActivatedRoute,
+    private router: Router,
     private destroyRef: DestroyRef,
   ) {}
 
@@ -102,9 +103,12 @@ export class PostFormComponent implements OnInit {
 
     (id !== null
       ? this.postService.updatePost(id, this.formGroup.value).pipe(
-          tap(() =>
-            this.translatedToastr.show(_('post.edit-success'), 'success'),
-          ),
+          tap(() => {
+            this.router.navigate(['posts', id], {
+              queryParamsHandling: 'preserve',
+            });
+            this.translatedToastr.show(_('post.edit-success'), 'success');
+          }),
           catchError((err) => {
             this.translatedToastr.show(_('post.edit-failure'), 'error');
             throw err;
