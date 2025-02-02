@@ -7,10 +7,12 @@
 
   <div class="navbar-items-container">
     <a routerLink="/posts" queryParamsHandling="preserve">
+      <fa-icon [icon]="faRectangleList" />
       {{ "navbar.all-posts" | translate }}
     </a>
 
     <a routerLink="/posts/form" queryParamsHandling="preserve">
+      <fa-icon [icon]="faSquarePlus" />
       {{ "navbar.add-post" | translate }}
     </a>
   </div>

@@ -7,7 +7,9 @@
     "add-success": "New post added successfully",
     "add-failure": "Failed to add new post, please check form errors",
     "edit-success": "Changes saved successfully",
-    "edit-failure": "Failed to save changes, please check form errors"
+    "edit-failure": "Failed to save changes, please check form errors",
+    "delete-success": "Deleted post successfully",
+    "delete-failure": "Failed to delete post"
   },
   "form": {
     "error": {
@@ -32,6 +34,7 @@
       "add-post": "Add Post",
       "edit-post": "Edit",
       "save-edit-post": "Save Changes",
+      "delete-post": "Delete",
       "expiry": "Expires at"
     }
   },
@@ -48,7 +51,7 @@
     "logout": "Sign Out",
     "settings": "Account Settings",
     "add-post": "Add post",
-    "all-posts": "All posts"
+    "all-posts": "Posts"
   },
   "filtering-sidebar-title": "Filtering",
   "category-filter": {
@@ -84,5 +87,13 @@
     "alpha": "Alphabetically",
     "modified": "By last modification date",
     "view-count": "By view count"
+  },
+  "modal": {
+    "delete-post": {
+      "title": "Delete post",
+      "content": "Are you sure you wish to delete this post?",
+      "confirm": "Delete",
+      "cancel": "Cancel"
+    }
   }
 }

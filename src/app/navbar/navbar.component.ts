@@ -10,6 +10,10 @@ import { AsyncPipe, UpperCasePipe } from '@angular/common';
 import { FaIconComponent } from '@fortawesome/angular-fontawesome';
 import { faBars } from '@fortawesome/free-solid-svg-icons';
 import { ChipComponent } from '../chip/chip.component';
+import {
+  faRectangleList,
+  faSquarePlus,
+} from '@fortawesome/free-regular-svg-icons';
 
 @Component({
   selector: 'app-navbar',
@@ -46,4 +50,6 @@ export class NavbarComponent implements OnInit {
   }
 
   protected readonly faBars = faBars;
+  protected readonly faSquarePlus = faSquarePlus;
+  protected readonly faRectangleList = faRectangleList;
 }

@@ -45,6 +45,10 @@ export class PostService {
       .pipe(map((post) => this.parsePostResponse(post)));
   }
 
+  public deletePost(id: number): Observable<void> {
+    return this.httpClient.delete<void>(`${this.url}${id}/`);
+  }
+
   private parsePostResponse(post: PostResponse): Post {
     return {
       ...post,
