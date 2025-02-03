@@ -1,4 +1,4 @@
-import { Component, DestroyRef, OnInit } from '@angular/core';
+import { Component, DestroyRef, Inject, OnInit } from '@angular/core';
 import { PostService } from '../post.service';
 import { Post } from '../models';
 import { PostItemComponent } from '../post-item/post-item.component';
@@ -6,10 +6,14 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { SearchBarComponent } from '../search-bar/search-bar.component';
 import { FilteringSidebarComponent } from '../filtering-sidebar/filtering-sidebar.component';
 import { ActivatedRoute, RouterLink, RouterOutlet } from '@angular/router';
-import { combineLatest, map, Observable } from 'rxjs';
+import { combineLatest, map, Observable, Subject, tap } from 'rxjs';
 import { CategoryService } from '../../categories/category.service';
 import { SorterComponent } from '../sorter/sorter.component';
-import { PaginatorComponent } from '../../paginator/paginator.component';
+import {
+  DEFAULT_PAGE_NUMBER,
+  DEFAULT_PAGE_SIZE,
+  PaginatorComponent,
+} from '../../paginator/paginator.component';
 
 @Component({
   selector: 'app-post-list',
@@ -24,14 +28,27 @@ import { PaginatorComponent } from '../../paginator/paginator.component';
   ],
   templateUrl: './post-list.component.html',
   styleUrl: './post-list.component.scss',
+  providers: [
+    {
+      provide: DEFAULT_PAGE_SIZE,
+      useValue: 10,
+    },
+    {
+      provide: DEFAULT_PAGE_NUMBER,
+      useValue: 1,
+    },
+  ],
 })
 export class PostListComponent implements OnInit {
   protected posts: Post[] = [];
+  private totalPostCount$ = new Subject<number>();
 
   public constructor(
     private postService: PostService,
     private categoryService: CategoryService,
     private route: ActivatedRoute,
+    @Inject(DEFAULT_PAGE_SIZE) private defaultPageSize: number,
+    @Inject(DEFAULT_PAGE_NUMBER) private defaultPageNumber: number,
     private destroyRef: DestroyRef,
   ) {}
 
@@ -44,6 +61,7 @@ export class PostListComponent implements OnInit {
         this.filterPostsByCity(),
         this.filterPostsByExpiry(),
         this.sortPosts(),
+        this.paginate(),
         takeUntilDestroyed(this.destroyRef),
       )
       .subscribe((posts) => (this.posts = posts));
@@ -142,5 +160,31 @@ export class PostListComponent implements OnInit {
           return posts;
         }),
       );
+  }
+
+  private paginate() {
+    const parseParam = (param: string | null, defaultValue: number): number =>
+      param !== null ? parseInt(param) : defaultValue;
+
+    return (posts$: Observable<Post[]>): Observable<Post[]> =>
+      combineLatest([
+        posts$.pipe(tap((posts) => this.totalPostCount$.next(posts.length))),
+        this.route.queryParamMap.pipe(
+          map((params) => [
+            parseParam(params.get('page-number'), this.defaultPageNumber),
+            parseParam(params.get('page-size'), this.defaultPageSize),
+          ]),
+        ),
+      ]).pipe(
+        map(([posts, [pageNumber, pageSize]]) => {
+          const offset = (pageNumber - 1) * pageSize;
+
+          return posts.slice(offset, offset + pageSize);
+        }),
+      );
+  }
+
+  protected getTotalPostCount(): Observable<number> {
+    return this.totalPostCount$.asObservable();
   }
 }

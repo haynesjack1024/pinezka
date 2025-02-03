@@ -1,4 +1,10 @@
-import { Component, Input, OnInit } from '@angular/core';
+import {
+  Component,
+  Inject,
+  InjectionToken,
+  Input,
+  OnInit,
+} from '@angular/core';
 import { ActivatedRoute, ParamMap, Router, RouterLink } from '@angular/router';
 import { BehaviorSubject, map, Observable, tap, combineLatest } from 'rxjs';
 import { AsyncPipe, NgClass } from '@angular/common';
@@ -10,6 +16,13 @@ import {
   faAnglesRight,
 } from '@fortawesome/free-solid-svg-icons';
 
+export const DEFAULT_PAGE_SIZE = new InjectionToken<number>(
+  'The default page size if none is given.',
+);
+export const DEFAULT_PAGE_NUMBER = new InjectionToken<number>(
+  'The default page number if none is given.',
+);
+
 @Component({
   selector: 'app-paginator',
   imports: [AsyncPipe, RouterLink, FaIconComponent, NgClass],
@@ -17,47 +30,45 @@ import {
   styleUrl: './paginator.component.scss',
 })
 export class PaginatorComponent implements OnInit {
-  protected readonly initialPageNumber: number = 1;
-  private readonly pageSize: number = 1;
   private readonly maxTileCount: number = 5;
   private readonly tileRangeMiddle: number = Math.round(this.maxTileCount / 2);
 
-  @Input({ required: true }) public set entriesCount(value: number) {
-    this.entriesCount$.next(value);
-  }
-  private readonly entriesCount$ = new BehaviorSubject<number>(0);
-  protected readonly pageCount$: Observable<number> = this.entriesCount$.pipe(
-    map((entriesCount) => Math.max(Math.ceil(entriesCount / this.pageSize), 1)),
-  );
+  @Input({ required: true }) public entriesCount$!: Observable<number>;
+  protected pageCount$!: Observable<number>;
 
   protected tiles$!: Observable<number[]>;
-  protected readonly currentPageNumber$ = new BehaviorSubject<number>(
-    this.initialPageNumber,
-  );
+  protected currentPageNumber$!: BehaviorSubject<number>;
   protected isFirstPage$!: Observable<boolean>;
   protected isLastPage$!: Observable<boolean>;
 
   public constructor(
     protected route: ActivatedRoute,
     private router: Router,
+    @Inject(DEFAULT_PAGE_NUMBER) protected defaultPageNumber: number,
+    @Inject(DEFAULT_PAGE_SIZE) private defaultPageSize: number,
   ) {}
 
   public ngOnInit(): void {
-    this.tiles$ = this.route.queryParamMap.pipe(
+    this.currentPageNumber$ = new BehaviorSubject(this.defaultPageNumber);
+    this.pageCount$ = this.getPageCount();
+    this.tiles$ = this.getTiles();
+    this.isFirstPage$ = this.getIsFirstPage();
+    this.isLastPage$ = this.getIsLastPage();
+  }
+
+  private getPageCount(): Observable<number> {
+    return this.entriesCount$.pipe(
+      map((entriesCount) =>
+        Math.max(Math.ceil(entriesCount / this.defaultPageSize), 1),
+      ),
+    );
+  }
+
+  private getTiles(): Observable<number[]> {
+    return this.route.queryParamMap.pipe(
       this.mapParamsToPageNumber(),
       tap((pageNumber) => this.currentPageNumber$.next(pageNumber)),
       this.mapPageNumberToTileRange(),
-    );
-
-    this.isFirstPage$ = this.currentPageNumber$.pipe(
-      map((currentPageNumber) => currentPageNumber === 1),
-    );
-
-    this.isLastPage$ = combineLatest([
-      this.pageCount$,
-      this.currentPageNumber$,
-    ]).pipe(
-      map(([pageCount, currentPageNumber]) => currentPageNumber === pageCount),
     );
   }
 
@@ -69,7 +80,7 @@ export class PaginatorComponent implements OnInit {
       ]).pipe(
         map(([pageNumber, pageCount]) => {
           if (pageNumber === null) {
-            return this.initialPageNumber;
+            return this.defaultPageNumber;
           }
 
           const parsedPageNumber = parseInt(pageNumber);
@@ -84,7 +95,7 @@ export class PaginatorComponent implements OnInit {
               queryParamsHandling: 'merge',
             });
 
-            return this.initialPageNumber;
+            return this.defaultPageNumber;
           }
 
           return parsedPageNumber;
@@ -118,6 +129,18 @@ export class PaginatorComponent implements OnInit {
 
   private getTileRangeSize(pageCount: number): number {
     return Math.min(this.maxTileCount, pageCount);
+  }
+
+  private getIsFirstPage(): Observable<boolean> {
+    return this.currentPageNumber$.pipe(
+      map((currentPageNumber) => currentPageNumber === 1),
+    );
+  }
+
+  private getIsLastPage(): Observable<boolean> {
+    return combineLatest([this.pageCount$, this.currentPageNumber$]).pipe(
+      map(([pageCount, currentPageNumber]) => currentPageNumber === pageCount),
+    );
   }
 
   protected readonly faAnglesLeft = faAnglesLeft;
