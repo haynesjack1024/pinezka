@@ -1,0 +1,55 @@
+@let currentPageNumber = (currentPageNumber$ | async) ?? this.initialPageNumber;
+@let isFirstPage = isFirstPage$ | async;
+@let isLastPage = isLastPage$ | async;
+
+<a
+  [attr.inert]="isFirstPage ? '' : null"
+  [routerLink]="[]"
+  [queryParams]="{ 'page-number': 1 }"
+  queryParamsHandling="merge"
+  [preserveFragment]="true"
+>
+  <fa-icon [icon]="faAnglesLeft" />
+</a>
+
+<a
+  [attr.inert]="isFirstPage ? '' : null"
+  [routerLink]="[]"
+  [queryParams]="{ 'page-number': currentPageNumber - 1 }"
+  queryParamsHandling="merge"
+  [preserveFragment]="true"
+>
+  <fa-icon [icon]="faAngleLeft" />
+</a>
+
+@for (number of tiles$ | async; track number) {
+  <a
+    [routerLink]="[]"
+    [ngClass]="{ 'is-active': currentPageNumber === number }"
+    [queryParams]="{ 'page-number': number }"
+    queryParamsHandling="merge"
+    [preserveFragment]="true"
+  >
+    <span>{{ number }}</span>
+  </a>
+}
+
+<a
+  [attr.inert]="isLastPage ? '' : null"
+  [routerLink]="[]"
+  [queryParams]="{ 'page-number': currentPageNumber + 1 }"
+  queryParamsHandling="merge"
+  [preserveFragment]="true"
+>
+  <fa-icon [icon]="faAngleRight" />
+</a>
+
+<a
+  [attr.inert]="isLastPage ? '' : null"
+  [routerLink]="[]"
+  [queryParams]="{ 'page-number': pageCount$ | async }"
+  queryParamsHandling="merge"
+  [preserveFragment]="true"
+>
+  <fa-icon [icon]="faAnglesRight" />
+</a>

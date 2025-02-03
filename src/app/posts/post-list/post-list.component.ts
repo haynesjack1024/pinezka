@@ -9,7 +9,7 @@ import { ActivatedRoute, RouterLink, RouterOutlet } from '@angular/router';
 import { combineLatest, map, Observable } from 'rxjs';
 import { CategoryService } from '../../categories/category.service';
 import { SorterComponent } from '../sorter/sorter.component';
-import { ViewportScroller } from '@angular/common';
+import { PaginatorComponent } from '../../paginator/paginator.component';
 
 @Component({
   selector: 'app-post-list',
@@ -20,6 +20,7 @@ import { ViewportScroller } from '@angular/common';
     SorterComponent,
     RouterOutlet,
     RouterLink,
+    PaginatorComponent,
   ],
   templateUrl: './post-list.component.html',
   styleUrl: './post-list.component.scss',
@@ -31,7 +32,6 @@ export class PostListComponent implements OnInit {
     private postService: PostService,
     private categoryService: CategoryService,
     private route: ActivatedRoute,
-    private scroll: ViewportScroller,
     private destroyRef: DestroyRef,
   ) {}
 

@@ -5,7 +5,7 @@
 @if (category?.id) {
   <a
     class="previous"
-    routerLink="."
+    [routerLink]="[]"
     [queryParams]="{ category: category?.parent }"
     queryParamsHandling="merge"
   >
@@ -29,7 +29,7 @@
   @for (subcategory of category?.subcategories; track subcategory.id) {
     <a
       class="child"
-      routerLink="."
+      [routerLink]="[]"
       [queryParams]="{ category: subcategory.id }"
       queryParamsHandling="merge"
     >

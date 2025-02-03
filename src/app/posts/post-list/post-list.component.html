@@ -3,6 +3,7 @@
   <div class="col">
     <app-search-bar />
     <app-sorter />
+    <app-paginator [entriesCount]="posts.length" />
 
     @for (post of posts; track post.id) {
       <app-post-item
@@ -11,6 +12,7 @@
         [post]="post"
       />
     }
+    <app-paginator [entriesCount]="posts.length" />
   </div>
   <div class="col">
     <router-outlet></router-outlet>
