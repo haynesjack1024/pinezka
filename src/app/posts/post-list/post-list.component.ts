@@ -1,14 +1,7 @@
-import {
-  AfterContentChecked,
-  Component,
-  DestroyRef,
-  Inject,
-  OnInit,
-} from '@angular/core';
+import { AfterContentChecked, Component, Inject, OnInit } from '@angular/core';
 import { PostService } from '../post.service';
 import { Post } from '../models';
 import { PostItemComponent } from '../post-item/post-item.component';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { SearchBarComponent } from '../search-bar/search-bar.component';
 import { FilteringSidebarComponent } from '../filtering-sidebar/filtering-sidebar.component';
 import { ActivatedRoute, RouterLink, RouterOutlet } from '@angular/router';
@@ -21,6 +14,7 @@ import {
   PaginatorComponent,
 } from '../../paginator/paginator.component';
 import { PostDetailsComponent } from '../post-details/post-details.component';
+import { AsyncPipe } from '@angular/common';
 
 @Component({
   selector: 'app-post-list',
@@ -32,6 +26,7 @@ import { PostDetailsComponent } from '../post-details/post-details.component';
     RouterOutlet,
     RouterLink,
     PaginatorComponent,
+    AsyncPipe,
   ],
   templateUrl: './post-list.component.html',
   styleUrl: './post-list.component.scss',
@@ -47,7 +42,7 @@ import { PostDetailsComponent } from '../post-details/post-details.component';
   ],
 })
 export class PostListComponent implements OnInit, AfterContentChecked {
-  protected posts: Post[] = [];
+  protected posts$!: Observable<Post[]>;
   private totalPostCount$ = new Subject<number>();
   protected childDetailsRoute?: ActivatedRoute;
 
@@ -57,11 +52,10 @@ export class PostListComponent implements OnInit, AfterContentChecked {
     protected route: ActivatedRoute,
     @Inject(DEFAULT_PAGE_SIZE) private defaultPageSize: number,
     @Inject(DEFAULT_PAGE_NUMBER) private defaultPageNumber: number,
-    private destroyRef: DestroyRef,
   ) {}
 
   public ngOnInit(): void {
-    this.postService
+    this.posts$ = this.postService
       .getPosts()
       .pipe(
         this.filterPostsByCategory(),
@@ -70,9 +64,7 @@ export class PostListComponent implements OnInit, AfterContentChecked {
         this.filterPostsByExpiry(),
         this.sortPosts(),
         this.paginate(),
-        takeUntilDestroyed(this.destroyRef),
-      )
-      .subscribe((posts) => (this.posts = posts));
+      );
 
     this.childDetailsRoute = this.getChildDetailsRoute(this.route);
   }

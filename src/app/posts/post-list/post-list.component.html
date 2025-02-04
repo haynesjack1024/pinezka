@@ -5,7 +5,7 @@
     <app-sorter />
     <app-paginator [entriesCount$]="getTotalPostCount()" />
 
-    @for (post of posts; track post.id) {
+    @for (post of posts$ | async; track post.id) {
       <app-post-item
         [routerLink]="isDetailsRouteMatched(post.id) ? ['..'] : [post.id]"
         [relativeTo]="this.route"
