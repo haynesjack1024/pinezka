@@ -1,6 +1,6 @@
 <div class="header">
   <div class="category tag">
-    @for (token of category; track token) {
+    @for (token of category; track token + "") {
       <span>{{ token }}</span>
       @if (!$last) {
         <fa-icon [icon]="faCaretRight" />

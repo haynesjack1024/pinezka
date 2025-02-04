@@ -1,4 +1,10 @@
-import { Component, DestroyRef, Inject, OnInit } from '@angular/core';
+import {
+  AfterContentChecked,
+  Component,
+  DestroyRef,
+  Inject,
+  OnInit,
+} from '@angular/core';
 import { PostService } from '../post.service';
 import { Post } from '../models';
 import { PostItemComponent } from '../post-item/post-item.component';
@@ -14,6 +20,7 @@ import {
   DEFAULT_PAGE_SIZE,
   PaginatorComponent,
 } from '../../paginator/paginator.component';
+import { PostDetailsComponent } from '../post-details/post-details.component';
 
 @Component({
   selector: 'app-post-list',
@@ -39,14 +46,15 @@ import {
     },
   ],
 })
-export class PostListComponent implements OnInit {
+export class PostListComponent implements OnInit, AfterContentChecked {
   protected posts: Post[] = [];
   private totalPostCount$ = new Subject<number>();
+  protected childDetailsRoute?: ActivatedRoute;
 
   public constructor(
     private postService: PostService,
     private categoryService: CategoryService,
-    private route: ActivatedRoute,
+    protected route: ActivatedRoute,
     @Inject(DEFAULT_PAGE_SIZE) private defaultPageSize: number,
     @Inject(DEFAULT_PAGE_NUMBER) private defaultPageNumber: number,
     private destroyRef: DestroyRef,
@@ -65,6 +73,8 @@ export class PostListComponent implements OnInit {
         takeUntilDestroyed(this.destroyRef),
       )
       .subscribe((posts) => (this.posts = posts));
+
+    this.childDetailsRoute = this.getChildDetailsRoute(this.route);
   }
 
   private filterPostsByCategory() {
@@ -184,7 +194,32 @@ export class PostListComponent implements OnInit {
       );
   }
 
+  private getChildDetailsRoute(
+    route?: ActivatedRoute,
+  ): ActivatedRoute | undefined {
+    return route?.children.find(
+      (value) => value.component === PostDetailsComponent,
+    );
+  }
+
+  public ngAfterContentChecked(): void {
+    const currentChildDetailsRoute = this.getChildDetailsRoute(this.route);
+    if (currentChildDetailsRoute !== this.childDetailsRoute) {
+      this.childDetailsRoute = currentChildDetailsRoute;
+    }
+  }
+
   protected getTotalPostCount(): Observable<number> {
     return this.totalPostCount$.asObservable();
+  }
+
+  protected isDetailsRouteMatched(id: number): boolean {
+    if (this.childDetailsRoute !== undefined) {
+      const matchedId = this.childDetailsRoute.snapshot.paramMap.get('id');
+
+      return matchedId !== null && parseInt(matchedId) === id;
+    }
+
+    return false;
   }
 }

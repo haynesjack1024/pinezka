@@ -11,7 +11,8 @@
   padding: 1rem;
   width: 100%;
 
-  &:hover {
+  &:hover,
+  &:focus-visible {
     cursor: pointer;
     outline: var(--border-medium) solid var(--accent);
     outline-offset: var(--border-medium-neg);

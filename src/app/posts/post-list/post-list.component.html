@@ -7,7 +7,8 @@
 
     @for (post of posts; track post.id) {
       <app-post-item
-        routerLink="./{{ post.id }}"
+        [routerLink]="isDetailsRouteMatched(post.id) ? ['..'] : [post.id]"
+        [relativeTo]="this.route"
         queryParamsHandling="preserve"
         [post]="post"
       />
