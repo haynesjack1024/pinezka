@@ -1,6 +1,8 @@
 import {
+  AfterViewInit,
   Component,
   ElementRef,
+  OnDestroy,
   OnInit,
   Renderer2,
   ViewChild,
@@ -34,12 +36,17 @@ import { ChipComponent } from '../chip/chip.component';
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.scss',
 })
-export class NavbarComponent implements OnInit {
-  protected showNavbarDropdown: boolean = false;
+export class NavbarComponent implements OnInit, AfterViewInit, OnDestroy {
+  @ViewChild('userDropdownButton', { read: ElementRef })
+  protected toggleUserDropdownButton!: ElementRef;
+  @ViewChild('userDropdown') private userDropdownRef!: ElementRef;
+
   @ViewChild('navbarItemsDropdownButton')
   protected toggleNavbarItemsDropdownButton!: ElementRef;
-  @ViewChild('navbarItems')
-  protected navbarItems!: ElementRef;
+  @ViewChild('navbarItems') private navbarItemsRef!: ElementRef;
+
+  private userDropdownVisibilityHandler?: DropdownVisibilityHandler;
+  private navbarItemsDropdownVisibilityHandler?: DropdownVisibilityHandler;
 
   protected user$!: Observable<User | null>;
 
@@ -50,11 +57,20 @@ export class NavbarComponent implements OnInit {
 
   public ngOnInit(): void {
     this.user$ = this.store.select(selectUser);
-    this.renderer.listen('window', 'click', this.hideNavbarItemsDropdown);
-    this.renderer.listen(
-      'window',
-      'keydown.enter',
-      this.hideNavbarItemsDropdown,
+  }
+
+  public ngAfterViewInit(): void {
+    this.userDropdownVisibilityHandler = new DropdownVisibilityHandler(
+      this.renderer,
+      this.toggleUserDropdownButton.nativeElement,
+      this.userDropdownRef.nativeElement,
+      true,
+    );
+
+    this.navbarItemsDropdownVisibilityHandler = new DropdownVisibilityHandler(
+      this.renderer,
+      this.toggleNavbarItemsDropdownButton.nativeElement,
+      this.navbarItemsRef.nativeElement,
     );
   }
 
@@ -62,25 +78,85 @@ export class NavbarComponent implements OnInit {
     this.store.dispatch(logout());
   }
 
-  protected toggleNavbarItemsDropdown(): void {
-    this.showNavbarDropdown = !this.showNavbarDropdown;
+  protected get isUserDropdownVisible(): boolean {
+    if (this.userDropdownVisibilityHandler) {
+      return this.userDropdownVisibilityHandler.getIsDropdownVisible();
+    }
+
+    return false;
   }
 
-  private hideNavbarItemsDropdown = (event: Event): void => {
-    if (
-      ![
-        this.navbarItems.nativeElement,
-        this.toggleNavbarItemsDropdownButton.nativeElement,
-        ...this.getAllChildren(this.toggleNavbarItemsDropdownButton),
-      ].includes(event.target)
-    ) {
-      this.showNavbarDropdown = false;
+  protected get isNavbarItemsDropdownVisible(): boolean {
+    if (this.navbarItemsDropdownVisibilityHandler) {
+      return this.navbarItemsDropdownVisibilityHandler.getIsDropdownVisible();
+    }
+
+    return false;
+  }
+
+  public ngOnDestroy(): void {
+    this.userDropdownVisibilityHandler?.cleanup();
+    this.navbarItemsDropdownVisibilityHandler?.cleanup();
+  }
+
+  protected readonly faBars = faBars;
+}
+
+type RemoveListenerFn = () => void;
+
+class DropdownVisibilityHandler {
+  private isDropdownVisible: boolean = false;
+
+  private readonly removeToggleListenerFnArray: RemoveListenerFn[] = [];
+  private readonly removeHideListenerFnArray: RemoveListenerFn[] = [];
+
+  public constructor(
+    private renderer: Renderer2,
+    private toggleButton: Element,
+    private dropdown: Element,
+    toggleOnEnter: boolean = false,
+  ) {
+    this.removeToggleListenerFnArray.push(
+      this.renderer.listen(this.toggleButton, 'click', this.toggleDropdown),
+    );
+
+    if (toggleOnEnter) {
+      this.removeToggleListenerFnArray.push(
+        this.renderer.listen(
+          this.toggleButton,
+          'keydown.enter',
+          this.toggleDropdown,
+        ),
+      );
+    }
+  }
+
+  private toggleDropdown = (): void => {
+    this.isDropdownVisible = !this.isDropdownVisible;
+    if (this.isDropdownVisible) {
+      this.removeHideListenerFnArray.push(
+        this.renderer.listen('window', 'click', this.hideDropdownOnClick),
+        this.renderer.listen('window', 'keydown.esc', this.hideDropdown),
+      );
+    } else {
+      this.removeHideListeners();
     }
   };
 
-  private getAllChildren(element: ElementRef<Element>): Element[] {
-    const allChildren: Element[] = [];
-    const elementStack: Element[] = [element.nativeElement];
+  private hideDropdownOnClick = (event: Event): void => {
+    if (
+      !(event.target instanceof Element) ||
+      ![this.dropdown, ...this.getWithAllChildren(this.toggleButton)].includes(
+        event.target,
+      )
+    ) {
+      this.hideDropdown();
+    }
+  };
+
+  private getWithAllChildren(element: Element): Element[] {
+    const allChildren: Element[] = [element];
+    const elementStack: Element[] = [element];
 
     while (elementStack.length) {
       const currentElement = elementStack.pop();
@@ -96,5 +172,34 @@ export class NavbarComponent implements OnInit {
     return allChildren;
   }
 
-  protected readonly faBars = faBars;
+  private hideDropdown = (): void => {
+    this.isDropdownVisible = false;
+    this.removeHideListeners();
+  };
+
+  private removeToggleListeners(): void {
+    this.removeListeners(this.removeToggleListenerFnArray);
+  }
+
+  private removeHideListeners(): void {
+    this.removeListeners(this.removeHideListenerFnArray);
+  }
+
+  private removeListeners(removeListenersArray: RemoveListenerFn[]): void {
+    do {
+      const removeListener = removeListenersArray.pop();
+      if (removeListener !== undefined) {
+        removeListener();
+      }
+    } while (removeListenersArray.length);
+  }
+
+  public getIsDropdownVisible(): boolean {
+    return this.isDropdownVisible;
+  }
+
+  public cleanup(): void {
+    this.removeToggleListeners();
+    this.removeHideListeners();
+  }
 }
