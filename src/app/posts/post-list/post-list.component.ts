@@ -142,6 +142,7 @@ export class PostListComponent implements OnInit, AfterContentChecked {
       a.title.localeCompare(b.title);
     const modifiedSort = (a: Post, b: Post): number =>
       b.modified.valueOf() - a.modified.valueOf();
+    const viewsSort = (a: Post, b: Post): number => b.views - a.views;
 
     return (posts$: Observable<Post[]>): Observable<Post[]> =>
       combineLatest([
@@ -155,6 +156,9 @@ export class PostListComponent implements OnInit, AfterContentChecked {
               break;
             case 'modified':
               posts.sort(modifiedSort);
+              break;
+            case 'views':
+              posts.sort(viewsSort);
               break;
           }
 

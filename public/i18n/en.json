@@ -9,7 +9,8 @@
     "edit-success": "Changes saved successfully",
     "edit-failure": "Failed to save changes, please check form errors",
     "delete-success": "Deleted post successfully",
-    "delete-failure": "Failed to delete post"
+    "delete-failure": "Failed to delete post",
+    "views-label": "Views"
   },
   "form": {
     "error": {
@@ -86,7 +87,7 @@
   "sorting": {
     "alpha": "Alphabetically",
     "modified": "By last modification date",
-    "view-count": "By view count"
+    "views": "By view count"
   },
   "modal": {
     "delete-post": {
