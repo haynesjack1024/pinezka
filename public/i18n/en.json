@@ -50,8 +50,8 @@
     "login": "Sign In",
     "logout": "Sign Out",
     "settings": "Account Settings",
-    "add-post": "Add post",
-    "all-posts": "Posts"
+    "add-post": "Add Post",
+    "all-posts": "Search Posts"
   },
   "filtering-sidebar-title": "Filtering",
   "category-filter": {

@@ -5,31 +5,30 @@
     {{ "website-name" | translate | uppercase }}
   </div>
 
-  <div class="navbar-items-container">
+  <div
+    #navbarItems
+    class="navbar-items-container"
+    [ngClass]="{ show: showNavbarDropdown }"
+  >
     <a routerLink="/posts" queryParamsHandling="preserve">
-      <fa-icon [icon]="faRectangleList" />
       {{ "navbar.all-posts" | translate }}
     </a>
 
     <a routerLink="/posts/form" queryParamsHandling="preserve">
-      <fa-icon [icon]="faSquarePlus" />
       {{ "navbar.add-post" | translate }}
     </a>
   </div>
 
-  <div class="navbar-items-container">
+  <div class="navbar-controls">
     <app-chip class="outline">{{ user?.username }}</app-chip>
-    <button (click)="onBarsClick()" class="user-dropdown-button">
+    <button
+      #navbarItemsDropdownButton
+      class="dropdown-button"
+      (click)="toggleNavbarItemsDropdown()"
+    >
       <fa-icon [icon]="faBars" />
     </button>
   </div>
-
-  @if (showUserDropdown) {
-    <div class="user-dropdown">
-      <button>{{ "navbar.settings" | translate }}</button>
-      <button (click)="onLogout()">{{ "navbar.logout" | translate }}</button>
-    </div>
-  }
 </div>
 
 <router-outlet />

@@ -1,25 +1,39 @@
 :host {
+  display: block;
   background-color: var(--bright);
   padding: 1.75rem;
   border-radius: var(--border-radius-standard);
   box-shadow: var(--light-box-shadow);
+  box-sizing: border-box;
+  margin: 1.5rem;
+  justify-self: center;
 
-  position: sticky;
-  top: 1rem;
+  width: 700px;
+
+  @media only screen and (max-width: 748px) {
+    width: 500px;
+  }
+
+  @media only screen and (max-width: 548px) {
+    width: calc(100% - 3rem);
+  }
 }
 
 .header {
   display: flex;
   justify-content: space-between;
-  margin-bottom: 1rem;
+  gap: 1rem;
+  margin-bottom: 0.75rem;
 
-  &:first-child {
-    margin-bottom: 0.15rem;
+  .col {
+    display: flex;
+    flex-direction: column;
   }
 }
 
 .category {
   display: flex;
+  flex-wrap: wrap;
   gap: 0.5rem;
 }
 
@@ -33,21 +47,29 @@
 .username {
   color: var(--accent);
   font-size: 1.1rem;
-  width: 25%;
   text-align: right;
 }
 
 .title {
   font-size: 1.25rem;
-  width: 75%;
-  margin-bottom: 0.5rem;
+  margin-bottom: 1rem;
 }
 
 .datetimes {
   display: grid;
   grid-template-columns: max-content max-content;
   gap: 0.4rem 1.5rem;
+  margin-bottom: 1rem;
   color: var(--secondary);
+
+  @media only screen and (max-width: 370px) {
+    grid-template-columns: max-content;
+    gap: 0;
+
+    :nth-child(2n) {
+      margin-bottom: 0.4rem;
+    }
+  }
 
   :nth-child(2n) {
     justify-self: right;
@@ -57,10 +79,10 @@
 .content {
   line-height: 1.5rem;
   letter-spacing: 0.03rem;
-  margin-bottom: 1rem;
 }
 
 .buttons {
+  margin-top: 1rem;
   display: flex;
   justify-content: end;
   gap: 1rem;

@@ -4,7 +4,7 @@ import { Post } from '../models';
 import { PostItemComponent } from '../post-item/post-item.component';
 import { SearchBarComponent } from '../search-bar/search-bar.component';
 import { FilteringSidebarComponent } from '../filtering-sidebar/filtering-sidebar.component';
-import { ActivatedRoute, RouterLink, RouterOutlet } from '@angular/router';
+import { ActivatedRoute, RouterLink } from '@angular/router';
 import { combineLatest, map, Observable, Subject, tap } from 'rxjs';
 import { CategoryService } from '../../categories/category.service';
 import { SorterComponent } from '../sorter/sorter.component';
@@ -23,7 +23,6 @@ import { AsyncPipe } from '@angular/common';
     SearchBarComponent,
     FilteringSidebarComponent,
     SorterComponent,
-    RouterOutlet,
     RouterLink,
     PaginatorComponent,
     AsyncPipe,

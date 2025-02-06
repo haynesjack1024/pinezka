@@ -58,7 +58,7 @@ export class ExpiryInputComponent
     }
   )(this.min, this.max);
 
-  public override writeValue(value: Date): void {
-    super.writeValue(this.format(dayjs(value)));
+  public override writeValue(value?: Date): void {
+    super.writeValue(value ? this.format(dayjs(value)) : '');
   }
 }

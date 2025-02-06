@@ -1,39 +1,21 @@
 :host {
+  position: relative;
+  padding: 1.5rem;
+  display: block;
   box-sizing: border-box;
-  width: 100%;
-
-  display: grid;
-  grid-template-columns: 1fr 3fr 1fr;
-  align-items: start;
-  gap: 4rem;
-
-  padding: 1rem;
-
-  &:has(.col:nth-child(2) > :last-child:nth-child(2)) {
-    grid-template-columns: min-content 1fr;
-  }
 }
 
-app-filtering-sidebar {
-  justify-self: left;
-}
-
-.main {
-  display: flex;
-  justify-content: space-evenly;
-  gap: 4rem;
-}
-
-.col {
-  width: min(100%, 37rem);
+.container {
   display: flex;
   flex-direction: column;
+  gap: 1rem;
+  margin: 0 auto;
+  box-sizing: border-box;
 
-  &:first-child {
-    row-gap: 1rem;
-  }
+  width: 100%;
+  max-width: 700px;
 
-  &:has(> :last-child:nth-child(1)) {
-    display: none;
+  @media only screen and (max-width: 748px) {
+    max-width: 500px;
   }
 }

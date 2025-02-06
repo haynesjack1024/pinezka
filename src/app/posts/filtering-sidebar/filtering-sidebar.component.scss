@@ -3,10 +3,17 @@
   flex-direction: column;
   row-gap: 2.5rem;
 
+  box-sizing: border-box;
   background-color: var(--bright);
   border-radius: var(--border-radius-standard);
   box-shadow: var(--light-box-shadow);
   padding: 2rem;
+
+  @media only screen and (min-width: 1230px) {
+    position: absolute;
+    top: 1.5rem;
+    left: 1.5rem;
+  }
 }
 
 .title {

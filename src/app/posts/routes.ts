@@ -12,29 +12,28 @@ export const postRoutes: Routes = [
           import('./post-list/post-list.component').then(
             (c) => c.PostListComponent,
           ),
-        children: [
-          {
-            path: 'form',
-            loadComponent: () =>
-              import('./post-form/post-form.component').then(
-                (c) => c.PostFormComponent,
-              ),
-          },
-          {
-            path: ':id',
-            loadComponent: () =>
-              import('./post-details/post-details.component').then(
-                (c) => c.PostDetailsComponent,
-              ),
-          },
-          {
-            path: ':id/edit',
-            loadComponent: () =>
-              import('./post-form/post-form.component').then(
-                (c) => c.PostFormComponent,
-              ),
-          },
-        ],
+        children: [],
+      },
+      {
+        path: 'form',
+        loadComponent: () =>
+          import('./post-form/post-form.component').then(
+            (c) => c.PostFormComponent,
+          ),
+      },
+      {
+        path: ':id',
+        loadComponent: () =>
+          import('./post-details/post-details.component').then(
+            (c) => c.PostDetailsComponent,
+          ),
+      },
+      {
+        path: ':id/edit',
+        loadComponent: () =>
+          import('./post-form/post-form.component').then(
+            (c) => c.PostFormComponent,
+          ),
       },
     ],
   },

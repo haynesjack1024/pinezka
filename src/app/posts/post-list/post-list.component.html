@@ -1,21 +1,16 @@
-<app-filtering-sidebar />
-<div class="main">
-  <div class="col">
-    <app-search-bar />
-    <app-sorter />
-    <app-paginator [entriesCount$]="getTotalPostCount()" />
+<div class="container">
+  <app-search-bar />
+  <app-filtering-sidebar />
+  <app-sorter />
+  <app-paginator [entriesCount$]="getTotalPostCount()" />
 
-    @for (post of posts$ | async; track post.id) {
-      <app-post-item
-        [routerLink]="isDetailsRouteMatched(post.id) ? ['..'] : [post.id]"
-        [relativeTo]="this.route"
-        queryParamsHandling="preserve"
-        [post]="post"
-      />
-    }
-    <app-paginator [entriesCount$]="getTotalPostCount()" />
-  </div>
-  <div class="col">
-    <router-outlet></router-outlet>
-  </div>
+  @for (post of posts$ | async; track post.id) {
+    <app-post-item
+      [routerLink]="isDetailsRouteMatched(post.id) ? ['..'] : [post.id]"
+      [relativeTo]="this.route"
+      queryParamsHandling="preserve"
+      [post]="post"
+    />
+  }
+  <app-paginator [entriesCount$]="getTotalPostCount()" />
 </div>
