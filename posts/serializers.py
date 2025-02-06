@@ -71,7 +71,11 @@ class PostSerializer(serializers.ModelSerializer):
         queryset=models.PostCategory.objects.all()
     )
     author = UserSerializer(read_only=True)
+    views = serializers.SerializerMethodField()
 
     class Meta:
         model = models.Post
         fields = "__all__"
+
+    def get_views(self, obj: "models.Post"):
+        return obj.views.count()
