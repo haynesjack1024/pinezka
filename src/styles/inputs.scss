@@ -24,6 +24,12 @@ textarea {
     outline: var(--border-medium) solid var(--accent);
     outline-offset: var(--border-thin-neg);
   }
+
+  &:disabled {
+    background-color: var(--tint);
+    color: var(--shade);
+    outline-color: var(--shade);
+  }
 }
 
 textarea {

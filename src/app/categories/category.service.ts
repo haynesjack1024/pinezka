@@ -65,7 +65,7 @@ export class CategoryService {
         combineLatest(
           categories.map((category) =>
             combineLatest(
-              category.full_name.map((token) =>
+              category.fullName.map((token) =>
                 this.translate.stream('category.' + token.trim()),
               ),
             ).pipe(
@@ -88,7 +88,7 @@ export class CategoryService {
       .pipe(
         switchMap((category) =>
           combineLatest(
-            category.full_name.map((token) =>
+            category.fullName.map((token) =>
               this.translate.stream('category.' + token.trim()),
             ),
           ),

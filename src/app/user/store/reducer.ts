@@ -34,6 +34,10 @@ export const userFeature = createFeature({
         loggedIn: false,
       }),
     ),
+    on(userApiActions.userPatchSucceeded, (state, user) => ({
+      ...state,
+      user: user,
+    })),
   ),
 });
 

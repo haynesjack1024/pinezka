@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { User, UserLoginDetails } from './models';
+import { User, UserLoginDetails, UserPatchRequest } from './models';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable, tap } from 'rxjs';
 
@@ -32,5 +32,12 @@ export class UserService {
 
   public logout(): Observable<void> {
     return this.httpClient.post<void>(this.logoutUrl, null);
+  }
+
+  public patchUser({
+    id,
+    ...user
+  }: Partial<UserPatchRequest>): Observable<User> {
+    return this.httpClient.patch<User>(`${this.usersUrl}${id}/`, user);
   }
 }

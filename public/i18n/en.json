@@ -36,7 +36,13 @@
       "edit-post": "Edit",
       "save-edit-post": "Save Changes",
       "delete-post": "Delete",
-      "expiry": "Expires at"
+      "expiry": "Expires at",
+      "email": "Email",
+      "change-password": "Change password",
+      "additional-field": {
+        "name": "Field name",
+        "value": "Value"
+      }
     }
   },
   "login": {
@@ -46,6 +52,11 @@
   "logout": {
     "success": "Successfully signed out",
     "failure": "Failed to sign out"
+  },
+  "patch" : {
+    "success": "Successfully updated user profile",
+    "password-success": "Successfully updated user profile. Please sign in again.",
+    "failure": "Failed to update user profile"
   },
   "navbar": {
     "login": "Sign In",
@@ -95,6 +106,17 @@
       "content": "Are you sure you wish to delete this post?",
       "confirm": "Delete",
       "cancel": "Cancel"
+    },
+    "patch-user": {
+      "title": "Update profile",
+      "content": "Are you sure you wish to save these changes to your profile?",
+      "confirm": "Save",
+      "cancel": "Cancel"
     }
+  },
+  "additional-fields": {
+    "title": "Additional Fields",
+    "add": "Add field",
+    "remove": "Remove field"
   }
 }
