@@ -14,30 +14,30 @@ export class UserService {
 
   private currentUser = new BehaviorSubject<User | null>(null);
 
-  public constructor(private httpClient: HttpClient) {}
+  public constructor(private http: HttpClient) {}
 
   public getUser(id: number): Observable<User> {
-    return this.httpClient.get<User>(`${this.usersUrl}${id}/`);
+    return this.http.get<User>(`${this.usersUrl}${id}/`);
   }
 
   public checkSession(): Observable<User> {
-    return this.httpClient.get<User>(this.checkSessionUrl);
+    return this.http.get<User>(this.checkSessionUrl);
   }
 
   public login(loginDetails: Partial<UserLoginDetails>): Observable<User> {
-    return this.httpClient
+    return this.http
       .post<User>(this.loginUrl, loginDetails)
       .pipe(tap((user) => this.currentUser.next(user)));
   }
 
   public logout(): Observable<void> {
-    return this.httpClient.post<void>(this.logoutUrl, null);
+    return this.http.post<void>(this.logoutUrl, null);
   }
 
   public patchUser({
     id,
     ...user
   }: Partial<UserPatchRequest>): Observable<User> {
-    return this.httpClient.patch<User>(`${this.usersUrl}${id}/`, user);
+    return this.http.patch<User>(`${this.usersUrl}${id}/`, user);
   }
 }
