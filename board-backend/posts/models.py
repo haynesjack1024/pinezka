@@ -96,7 +96,7 @@ class Post(
     title = models.CharField(max_length=130)
     content = models.TextField()
     expiry = models.DateTimeField(_("Expires at"))
-    # TODO add view count
+    views = models.ManyToManyField(settings.AUTH_USER_MODEL)
 
     class Meta:
         rules_permissions = common_rules.get_public_ownership_ruleset(rules.is_owner)

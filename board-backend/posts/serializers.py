@@ -11,11 +11,14 @@ from . import models
 
 
 class PostCategoryFullNameSerializer(serializers.ModelSerializer):
-    full_name = serializers.CharField(source="__str__")
+    full_name = serializers.SerializerMethodField()
 
     class Meta:
         model = models.PostCategory
         fields = ["id", "full_name"]
+
+    def get_full_name(self, obj: models.PostCategory):
+        return str(obj).split(" > ")
 
 
 class PostCategoryTinySerializer(serializers.ModelSerializer):
@@ -68,7 +71,11 @@ class PostSerializer(serializers.ModelSerializer):
         queryset=models.PostCategory.objects.all()
     )
     author = UserSerializer(read_only=True)
+    views = serializers.SerializerMethodField()
 
     class Meta:
         model = models.Post
         fields = "__all__"
+
+    def get_views(self, obj: "models.Post"):
+        return obj.views.count()
