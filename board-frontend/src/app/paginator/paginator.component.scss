@@ -1,0 +1,37 @@
+:host {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+
+  background-color: var(--bright);
+  height: 2.5rem;
+  width: 2.5rem;
+  border-radius: var(--border-radius-standard);
+  box-shadow: var(--light-box-shadow);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &:hover {
+    box-shadow: var(--medium-box-shadow);
+  }
+
+  &[inert] {
+    box-shadow: none;
+    outline: var(--border-thin) solid var(--muted);
+    outline-offset: var(--border-thin-neg);
+    background-color: var(--tint);
+    color: var(--muted);
+  }
+
+  &.is-active {
+    outline: var(--border-thin) solid var(--accent);
+    outline-offset: var(--border-thin-neg);
+  }
+}

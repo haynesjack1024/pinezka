@@ -5,7 +5,11 @@
     {{ "website-name" | translate | uppercase }}
   </div>
 
-  <div class="navbar-items-container">
+  <div
+    #navbarItems
+    class="navbar-items-container"
+    [ngClass]="{ show: isNavbarItemsDropdownVisible }"
+  >
     <a routerLink="/posts" queryParamsHandling="preserve">
       {{ "navbar.all-posts" | translate }}
     </a>
@@ -15,19 +19,33 @@
     </a>
   </div>
 
-  <div class="navbar-items-container">
-    <app-chip class="outline">{{ user?.username }}</app-chip>
-    <button (click)="onBarsClick()" class="user-dropdown-button">
+  <div class="navbar-controls">
+    <app-chip
+      #userDropdownButton
+      class="clickable"
+      [ngClass]="{ outline: !isUserDropdownVisible }"
+      tabindex="0"
+    >
+      {{ user?.username }}
+    </app-chip>
+    <button #navbarItemsDropdownButton class="dropdown-button">
       <fa-icon [icon]="faBars" />
     </button>
   </div>
 
-  @if (showUserDropdown) {
-    <div class="user-dropdown">
-      <button>{{ "navbar.settings" | translate }}</button>
-      <button (click)="onLogout()">{{ "navbar.logout" | translate }}</button>
-    </div>
-  }
+  <div
+    #userDropdown
+    class="user-dropdown"
+    [ngClass]="{ show: isUserDropdownVisible }"
+  >
+    <button routerLink="/profile/edit">
+      {{ "navbar.settings" | translate }}
+    </button>
+
+    <button (click)="onLogout()">
+      {{ "navbar.logout" | translate }}
+    </button>
+  </div>
 </div>
 
 <router-outlet />

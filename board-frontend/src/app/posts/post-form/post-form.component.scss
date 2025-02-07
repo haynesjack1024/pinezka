@@ -1,8 +1,12 @@
 :host {
-  height: 100%;
+  display: block;
+  box-sizing: border-box;
+  padding: 1.5rem;
 
-  > form {
-    position: sticky;
-    top: 1rem;
+  form {
+    box-sizing: border-box;
+    justify-self: center;
+    width: 100%;
+    max-width: 548px;
   }
 }

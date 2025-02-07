@@ -18,6 +18,7 @@ import * as userEffects from './user/store/effects';
 import { userFeature } from './user/store/reducer';
 import { authInterceptor } from './user/auth/auth.interceptor';
 import { csrfInterceptor } from './user/auth/csrf.interceptor';
+import { snakeCaseInterceptor } from './snake-case.interceptor';
 
 const httpLoaderFactory: (http: HttpClient) => TranslateHttpLoader = (
   http: HttpClient,
@@ -26,7 +27,13 @@ const httpLoaderFactory: (http: HttpClient) => TranslateHttpLoader = (
 export const appConfig: ApplicationConfig = {
   providers: [
     provideZoneChangeDetection({ eventCoalescing: true }),
-    provideHttpClient(withInterceptors([authInterceptor, csrfInterceptor])),
+    provideHttpClient(
+      withInterceptors([
+        authInterceptor,
+        csrfInterceptor,
+        snakeCaseInterceptor,
+      ]),
+    ),
     provideTranslateService({
       loader: {
         provide: TranslateLoader,

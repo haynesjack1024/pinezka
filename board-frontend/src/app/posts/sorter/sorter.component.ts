@@ -5,7 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { NgClass } from '@angular/common';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
-const sortingTypes = ['alpha', 'modified', 'view-count'] as const;
+const sortingTypes = ['alpha', 'modified', 'views'] as const;
 type SortingType = (typeof sortingTypes)[number];
 
 @Component({

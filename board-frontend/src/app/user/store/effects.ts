@@ -17,7 +17,7 @@ import {
   tap,
 } from 'rxjs';
 
-import { login, logout, userApiActions } from './actions';
+import { login, logout, patch, userApiActions } from './actions';
 import { Router } from '@angular/router';
 import {
   ToastType,
@@ -62,7 +62,10 @@ function createNavigationEffect(
 export const checkIsUserLoggedIn = createEffect(
   (actions$ = inject(Actions), userService = inject(UserService)) =>
     actions$.pipe(
-      ofType(ROOT_EFFECTS_INIT),
+      ofType(
+        ROOT_EFFECTS_INIT,
+        userApiActions.userPatchWithPasswordChangeSucceeded,
+      ),
       exhaustMap(() =>
         userService.checkSession().pipe(
           map((user) => userApiActions.loggedInUserFound(user)),
@@ -132,5 +135,43 @@ export const logoutSuccessNotif = createNotifEffect(
 export const logoutFailureNotif = createNotifEffect(
   userApiActions.userLogoutFailed,
   _('logout.failure'),
+  'error',
+);
+
+export const patchUser = createEffect(
+  (actions$ = inject(Actions), userService = inject(UserService)) =>
+    actions$.pipe(
+      ofType(patch),
+      exhaustMap(({ id, username, password, email, additionalFields }) =>
+        userService
+          .patchUser({ id, username, password, email, additionalFields })
+          .pipe(
+            map((user) =>
+              password
+                ? userApiActions.userPatchWithPasswordChangeSucceeded(user)
+                : userApiActions.userPatchSucceeded(user),
+            ),
+            catchError(() => of(userApiActions.userPatchFailed())),
+          ),
+      ),
+    ),
+  { functional: true },
+);
+
+export const patchSuccessNotif = createNotifEffect(
+  userApiActions.userPatchSucceeded,
+  _('patch.success'),
+  'success',
+);
+
+export const patchWithPasswordSuccessNotif = createNotifEffect(
+  userApiActions.userPatchWithPasswordChangeSucceeded,
+  _('patch.password-success'),
+  'success',
+);
+
+export const patchFailureNotif = createNotifEffect(
+  userApiActions.userPatchFailed,
+  _('patch.failure'),
   'error',
 );

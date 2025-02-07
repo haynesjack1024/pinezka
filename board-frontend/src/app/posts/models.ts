@@ -10,6 +10,7 @@ export interface PostResponse {
   readonly created: string;
   readonly modified: string;
   readonly expiry: string;
+  readonly views: number;
 }
 
 export interface Post {
@@ -22,6 +23,7 @@ export interface Post {
   readonly created: Date;
   readonly modified: Date;
   readonly expiry: Date;
+  readonly views: number;
 }
 
 export interface PostRequest {

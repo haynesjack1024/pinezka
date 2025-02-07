@@ -1,4 +1,4 @@
-form {
+.form {
   background-color: var(--bright);
   padding: 1rem;
   border-radius: var(--border-radius-standard);
@@ -8,4 +8,9 @@ form {
   row-gap: 1rem;
 
   box-shadow: var(--light-box-shadow);
+
+  label {
+    font-weight: 500;
+    color: var(--secondary);
+  }
 }

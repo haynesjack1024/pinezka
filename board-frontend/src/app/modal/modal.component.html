@@ -1,0 +1,10 @@
+<dialog #dialog>
+  <div>{{ title }}</div>
+  <div>{{ content }}</div>
+  <form method="dialog">
+    <button class="cancel">{{ cancelLabel }}</button>
+    <button class="confirm" (click)="onConfirm($event)">
+      {{ confirmLabel }}
+    </button>
+  </form>
+</dialog>

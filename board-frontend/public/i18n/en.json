@@ -5,7 +5,12 @@
     "expiry-label": "Expires",
     "modified-label": "Last modified",
     "add-success": "New post added successfully",
-    "add-failure": "Failed to add new post, please check form errors"
+    "add-failure": "Failed to add new post, please check form errors",
+    "edit-success": "Changes saved successfully",
+    "edit-failure": "Failed to save changes, please check form errors",
+    "delete-success": "Deleted post successfully",
+    "delete-failure": "Failed to delete post",
+    "views-label": "Views"
   },
   "form": {
     "error": {
@@ -28,7 +33,16 @@
       "title": "Title",
       "content": "Content",
       "add-post": "Add Post",
-      "expiry": "Expires at"
+      "edit-post": "Edit",
+      "save-edit-post": "Save Changes",
+      "delete-post": "Delete",
+      "expiry": "Expires at",
+      "email": "Email",
+      "change-password": "Change password",
+      "additional-field": {
+        "name": "Field name",
+        "value": "Value"
+      }
     }
   },
   "login": {
@@ -39,12 +53,17 @@
     "success": "Successfully signed out",
     "failure": "Failed to sign out"
   },
+  "patch" : {
+    "success": "Successfully updated user profile",
+    "password-success": "Successfully updated user profile. Please sign in again.",
+    "failure": "Failed to update user profile"
+  },
   "navbar": {
     "login": "Sign In",
     "logout": "Sign Out",
     "settings": "Account Settings",
-    "add-post": "Add post",
-    "all-posts": "All posts"
+    "add-post": "Add Post",
+    "all-posts": "Search Posts"
   },
   "filtering-sidebar-title": "Filtering",
   "category-filter": {
@@ -71,7 +90,7 @@
   },
   "city-filter": {
     "title": "City",
-    "all-option": "All cities"
+    "all-option": "--"
   },
   "expiry-filter": {
     "title": "Expired"
@@ -79,6 +98,26 @@
   "sorting": {
     "alpha": "Alphabetically",
     "modified": "By last modification date",
-    "view-count": "By view count"
-  }
+    "views": "By view count"
+  },
+  "modal": {
+    "delete-post": {
+      "title": "Delete post",
+      "content": "Are you sure you wish to delete this post?",
+      "confirm": "Delete",
+      "cancel": "Cancel"
+    },
+    "patch-user": {
+      "title": "Update profile",
+      "content": "Are you sure you wish to save these changes to your profile?",
+      "confirm": "Save",
+      "cancel": "Cancel"
+    }
+  },
+  "additional-fields": {
+    "title": "Additional Fields",
+    "add": "Add field",
+    "remove": "Remove field"
+  },
+  "go-back": "Go back"
 }

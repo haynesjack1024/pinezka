@@ -1,0 +1,54 @@
+<app-back-button />
+
+<div class="header">
+  <div class="col">
+    <div class="category tag">
+      @for (token of category; track token + "") {
+        <span>{{ token }}</span>
+        @if (!$last) {
+          <fa-icon [icon]="faCaretRight" />
+        }
+      }
+    </div>
+  </div>
+  <div class="col">
+    <span class="tag">{{ post?.city }}</span>
+    <span class="username">{{ post?.author?.username }}</span>
+  </div>
+</div>
+
+<div class="title">{{ post?.title }}</div>
+
+<div class="datetimes">
+  <span>{{ "post.modified-label" | translate }}</span>
+  <span>{{ post?.modified | date: "short" }}</span>
+
+  <span>{{ "post.created-label" | translate }}</span>
+  <span>{{ post?.created | date: "short" }}</span>
+
+  <span>{{ "post.expiry-label" | translate }}</span>
+  <span>{{ post?.expiry | date: "short" }}</span>
+</div>
+
+<div class="content">
+  {{ post?.content }}
+</div>
+
+@if (post?.author?.id === (currentUser | async)?.id) {
+  <div class="buttons">
+    <button routerLink="./edit" queryParamsHandling="preserve">
+      {{ "form.label.edit-post" | translate }}
+    </button>
+    <button (click)="onDelete()">
+      {{ "form.label.delete-post" | translate }}
+    </button>
+  </div>
+
+  <app-modal
+    title="{{ 'modal.delete-post.title' | translate }}"
+    content="{{ 'modal.delete-post.content' | translate }}"
+    confirmLabel="{{ 'modal.delete-post.confirm' | translate }}"
+    cancelLabel="{{ 'modal.delete-post.cancel' | translate }}"
+    (confirmed)="onDeleteConfirm()"
+  />
+}
