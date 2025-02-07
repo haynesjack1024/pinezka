@@ -15,6 +15,7 @@ import { patch } from '../store/actions';
 import { InputComponent } from '../../forms/input/input.component';
 import { TranslatePipe } from '@ngx-translate/core';
 import { ModalComponent } from '../../modal/modal.component';
+import { BackButtonComponent } from '../../back-button/back-button.component';
 
 type AdditionFieldFormGroup = FormGroup<{
   name: FormControl<string>;
@@ -32,7 +33,13 @@ type UserFormGroup = FormGroup<{
 
 @Component({
   selector: 'app-user-form',
-  imports: [InputComponent, ReactiveFormsModule, TranslatePipe, ModalComponent],
+  imports: [
+    InputComponent,
+    ReactiveFormsModule,
+    TranslatePipe,
+    ModalComponent,
+    BackButtonComponent,
+  ],
   templateUrl: './user-form.component.html',
   styleUrl: './user-form.component.scss',
 })

@@ -1,4 +1,5 @@
 <form class="form" [formGroup]="formGroup" (ngSubmit)="onSubmit()">
+  <app-back-button />
   <app-city-select formControlName="city" />
   <app-category-select formControlName="category" />
   <app-textarea

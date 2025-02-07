@@ -1,5 +1,6 @@
 @if (formGroup) {
   <form class="form" [formGroup]="formGroup" (ngSubmit)="onSubmit()">
+    <app-back-button />
     <app-input
       formControlName="username"
       [label]="'form.label.username' | translate"

@@ -118,5 +118,6 @@
     "title": "Additional Fields",
     "add": "Add field",
     "remove": "Remove field"
-  }
+  },
+  "go-back": "Go back"
 }

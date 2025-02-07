@@ -22,6 +22,7 @@ import { User } from '../../user/models';
 import { selectUser } from '../../user/store/reducer';
 import { ModalComponent } from '../../modal/modal.component';
 import { TranslatedToastrService } from '../../translated-toastr.service';
+import { BackButtonComponent } from '../../back-button/back-button.component';
 
 @Component({
   selector: 'app-post-details',
@@ -32,6 +33,7 @@ import { TranslatedToastrService } from '../../translated-toastr.service';
     RouterLink,
     AsyncPipe,
     ModalComponent,
+    BackButtonComponent,
   ],
   templateUrl: './post-details.component.html',
   styleUrl: './post-details.component.scss',
