@@ -19,6 +19,7 @@ textarea {
   background-color: var(--bright);
   border: var(--border-thin) solid var(--shade);
   box-shadow: var(--light-box-shadow);
+  color: inherit;
 
   &:focus-visible {
     outline: var(--border-medium) solid var(--accent);
