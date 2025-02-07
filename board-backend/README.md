@@ -17,16 +17,22 @@ Go to the project directory
   cd haynes-jack/board-backend
 ```
 
-Install dependencies
+Create venv
 
 ```bash
-  pip install -r requirements/base.txt
+  python3 -m venv venv
 ```
 
 Active venv
 
 ```bash
   source venv/bin/activate
+```
+
+Install dependencies
+
+```bash
+  pip install -r requirements/base.txt
 ```
 
 Make and run migrations
