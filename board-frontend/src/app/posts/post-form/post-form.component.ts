@@ -13,7 +13,7 @@ import { PostService } from '../post.service';
 import { TranslatedToastrService } from '../../translated-toastr.service';
 import { _ } from '@ngx-translate/core';
 import { ExpiryInputComponent } from '../expiry/expiry-input/expiry-input.component';
-import { ActivatedRoute, Router, RouterLink } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import {
   BehaviorSubject,
@@ -39,7 +39,6 @@ import { BackButtonComponent } from '../../back-button/back-button.component';
     TextareaComponent,
     ExpiryInputComponent,
     AsyncPipe,
-    RouterLink,
     BackButtonComponent,
   ],
   templateUrl: './post-form.component.html',
