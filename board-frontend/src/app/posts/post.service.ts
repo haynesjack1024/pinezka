@@ -32,10 +32,7 @@ export class PostService {
 
   public addPost(post: Partial<PostRequest>): Observable<Post> {
     return this.http
-      .post<PostResponse>(this.url, {
-        ...post,
-        expiry: post.expiry ? this.setTimeToNow(post.expiry) : null,
-      })
+      .post<PostResponse>(this.url, post)
       .pipe(map((post) => this.parsePostResponse(post)));
   }
 
@@ -56,15 +53,5 @@ export class PostService {
       created: new Date(post.created),
       modified: new Date(post.modified),
     };
-  }
-
-  private setTimeToNow(date: Date): Date {
-    const now = dayjs();
-
-    return dayjs(date)
-      .hour(now.hour())
-      .minute(now.minute())
-      .second(now.second())
-      .toDate();
   }
 }

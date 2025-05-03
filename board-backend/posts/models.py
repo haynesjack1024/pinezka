@@ -95,7 +95,7 @@ class Post(
     )
     title = models.CharField(max_length=130)
     content = models.TextField()
-    expiry = models.DateTimeField(_("Expires at"))
+    expiry = models.DateField(_("Expires at"))
     views = models.ManyToManyField(settings.AUTH_USER_MODEL)
 
     class Meta:
