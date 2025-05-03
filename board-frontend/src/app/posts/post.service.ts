@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { PostResponse, Post, PostRequest } from './models';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, map, Observable, switchMap } from 'rxjs';
-import dayjs from 'dayjs';
 
 @Injectable({
   providedIn: 'root',
