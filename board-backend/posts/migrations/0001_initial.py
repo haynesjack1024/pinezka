@@ -72,7 +72,7 @@ class Migration(migrations.Migration):
                 ),
                 ("title", models.CharField(max_length=130)),
                 ("content", models.TextField()),
-                ("expiry", models.DateTimeField(verbose_name="Expires at")),
+                ("expiry", models.DateField(verbose_name="Expires at")),
                 (
                     "author",
                     models.ForeignKey(

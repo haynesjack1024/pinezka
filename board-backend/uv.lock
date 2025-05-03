@@ -19,6 +19,7 @@ dependencies = [
     { name = "django" },
     { name = "django-model-utils" },
     { name = "djangorestframework" },
+    { name = "python-lorem-ipsum" },
     { name = "rules" },
 ]
 
@@ -32,6 +33,7 @@ requires-dist = [
     { name = "django", specifier = ">=5.2" },
     { name = "django-model-utils", specifier = ">=5.0.0" },
     { name = "djangorestframework", specifier = ">=3.16.0" },
+    { name = "python-lorem-ipsum", specifier = ">=2.0.0" },
     { name = "rules", specifier = ">=3.5" },
 ]
 
@@ -144,6 +146,15 @@ dependencies = [
 sdist = { url = "https://files.pythonhosted.org/packages/08/39/679ca9b26c7bb2999ff122d50faa301e49af82ca9c066ec061cfbc0c6784/pre_commit-4.2.0.tar.gz", hash = "sha256:601283b9757afd87d40c4c4a9b2b5de9637a8ea02eaff7adc2d0fb4e04841146", size = 193424 }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/88/74/a88bf1b1efeae488a0c0b7bdf71429c313722d1fc0f377537fbe554e6180/pre_commit-4.2.0-py2.py3-none-any.whl", hash = "sha256:a009ca7205f1eb497d10b845e52c838a98b6cdd2102a6c8e4540e94ee75c58bd", size = 220707 },
+]
+
+[[package]]
+name = "python-lorem-ipsum"
+version = "2.0.0"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/44/1e/5359ce554f855e07b9bc204c3840f01b1c776b095c48c9337c97fedcadb6/python_lorem_ipsum-2.0.0.tar.gz", hash = "sha256:6f2ada24c5759fcd6d6120eea8d97f2fc93ee1e3ccae16df25f21f989f25cbba", size = 9075 }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/c0/3e/3755de0f56672897eacf895d0fe39fa8c7f898b0ad1a919908c8c32a8e0b/python_lorem_ipsum-2.0.0-py3-none-any.whl", hash = "sha256:67bc844703f27369970261e89329aeb386bbd3c22526f9dad64cfc7409e3a7fa", size = 8557 },
 ]
 
 [[package]]
