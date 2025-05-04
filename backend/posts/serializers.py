@@ -1,10 +1,9 @@
 from itertools import chain
 
+from cities import models as cities_models
 from django.core.exceptions import ValidationError
 from django.db import connection
 from rest_framework import exceptions, serializers
-
-from cities import models as cities_models
 from user_management.serializers import UserSerializer
 
 from . import models

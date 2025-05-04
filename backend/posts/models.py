@@ -1,11 +1,10 @@
+from common import rules as common_rules
 from django.conf import settings
 from django.core.exceptions import ValidationError
 from django.db import connection, models
 from django.utils.translation import gettext as _
 from model_utils import models as model_utils_models
 from rules.contrib.models import RulesModel, RulesModelBase, RulesModelMixin
-
-from common import rules as common_rules
 
 from . import rules
 

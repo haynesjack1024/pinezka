@@ -1,7 +1,6 @@
+from common import rules as common_rules
 from django.db import models
 from rules.contrib import models as rules_models
-
-from common import rules as common_rules
 
 
 class City(rules_models.RulesModel):
