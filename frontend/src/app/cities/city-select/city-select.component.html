@@ -1,0 +1,10 @@
+<label>
+  {{ "form.label.city" | translate }}
+  <select [formControl]="formControl" name="city">
+    <option disabled ngValue="">--</option>
+    @for (city of cities; track city.name) {
+      <option [ngValue]="city.name">{{ city.name }}</option>
+    }
+  </select>
+</label>
+<div class="error">{{ error$ | async }}</div>

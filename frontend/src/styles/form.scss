@@ -1,0 +1,16 @@
+.form {
+  background-color: var(--bright);
+  padding: 1rem;
+  border-radius: var(--border-radius-standard);
+
+  display: flex;
+  flex-direction: column;
+  row-gap: 1rem;
+
+  box-shadow: var(--light-box-shadow);
+
+  label {
+    font-weight: 500;
+    color: var(--secondary);
+  }
+}

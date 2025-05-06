@@ -1,0 +1,73 @@
+@if (formGroup) {
+  <form class="form" [formGroup]="formGroup" (ngSubmit)="onSubmit()">
+    <app-back-button />
+    <app-input
+      formControlName="username"
+      [label]="'form.label.username' | translate"
+      name="username"
+    />
+    <app-input
+      formControlName="email"
+      [label]="'form.label.email' | translate"
+      name="email"
+    />
+
+    <label>
+      <input
+        formControlName="changePassword"
+        type="checkbox"
+        name="change-password"
+      />
+      {{ "form.label.change-password" | translate }}
+    </label>
+    @if (formGroup.controls.changePassword.value) {
+      <app-input
+        type="password"
+        formControlName="password"
+        [label]="'form.label.password' | translate"
+        name="password"
+      />
+    }
+
+    <div class="section">
+      <span class="title">{{ "additional-fields.title" | translate }}</span>
+
+      @for (
+        additionalField of formGroup.controls.additionalFields.controls;
+        track additionalField
+      ) {
+        <div class="section accent">
+          <app-input
+            [formControl]="additionalField.controls.name"
+            [label]="'form.label.additional-field.name' | translate"
+            name="additional-field-name"
+          />
+
+          <app-input
+            [formControl]="additionalField.controls.value"
+            [label]="'form.label.additional-field.value' | translate"
+            name="additional-field-value"
+          />
+
+          <button type="button" (click)="removeAdditionalField($index)">
+            {{ "additional-fields.remove" | translate }}
+          </button>
+        </div>
+      }
+
+      <button type="button" (click)="addAdditionalField()">
+        {{ "additional-fields.add" | translate }}
+      </button>
+    </div>
+
+    <button type="submit">Submit</button>
+  </form>
+}
+
+<app-modal
+  title="{{ 'modal.patch-user.title' | translate }}"
+  content="{{ 'modal.patch-user.content' | translate }}"
+  confirmLabel="{{ 'modal.patch-user.confirm' | translate }}"
+  cancelLabel="{{ 'modal.patch-user.cancel' | translate }}"
+  (confirmed)="onConfirm()"
+/>

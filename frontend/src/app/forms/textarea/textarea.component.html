@@ -1,0 +1,10 @@
+<label>
+  {{ label }}
+  <textarea
+    autosize
+    class="form-input"
+    [name]="name"
+    [formControl]="formControl"
+  ></textarea>
+</label>
+<div class="error">{{ error$ | async }}</div>

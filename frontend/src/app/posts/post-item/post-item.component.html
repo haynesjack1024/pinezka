@@ -1,0 +1,14 @@
+<span class="title">{{ post.title }}</span>
+<div class="info">
+  <div class="chips">
+    <app-chip>{{ post.city }}</app-chip>
+    <app-chip class="outline">{{ post.author.username }}</app-chip>
+  </div>
+  <div class="metadata">
+    <span
+      >{{ "post.modified-label" | translate }}
+      {{ post.modified | date: "short" }}</span
+    >
+    <span>{{ "post.views-label" | translate }} {{ post.views }}</span>
+  </div>
+</div>

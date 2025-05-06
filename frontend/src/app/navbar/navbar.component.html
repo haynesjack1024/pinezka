@@ -1,0 +1,52 @@
+@let user = user$ | async;
+
+<div class="navbar">
+  <div>
+    {{ "website-name" | translate | uppercase }}
+    <app-color-switcher />
+  </div>
+
+  <div
+    #navbarItems
+    class="navbar-items-container"
+    [ngClass]="{ show: isNavbarItemsDropdownVisible }"
+  >
+    <a routerLink="/posts" queryParamsHandling="preserve">
+      {{ "navbar.all-posts" | translate }}
+    </a>
+
+    <a routerLink="/posts/form" queryParamsHandling="preserve">
+      {{ "navbar.add-post" | translate }}
+    </a>
+  </div>
+
+  <div class="navbar-controls">
+    <app-chip
+      #userDropdownButton
+      class="clickable"
+      [ngClass]="{ outline: !isUserDropdownVisible }"
+      tabindex="0"
+    >
+      {{ user?.username }}
+    </app-chip>
+    <button #navbarItemsDropdownButton class="dropdown-button">
+      <fa-icon [icon]="faBars" />
+    </button>
+  </div>
+
+  <div
+    #userDropdown
+    class="user-dropdown"
+    [ngClass]="{ show: isUserDropdownVisible }"
+  >
+    <button routerLink="/profile/edit">
+      {{ "navbar.settings" | translate }}
+    </button>
+
+    <button (click)="onLogout()">
+      {{ "navbar.logout" | translate }}
+    </button>
+  </div>
+</div>
+
+<router-outlet />

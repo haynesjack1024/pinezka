@@ -1,0 +1,45 @@
+@use "fonts";
+
+:host {
+  box-shadow: var(--light-box-shadow);
+  background-color: var(--bright);
+  display: flex;
+  flex-direction: column;
+  row-gap: 1rem;
+  box-sizing: border-box;
+  border-radius: var(--border-radius-standard);
+  padding: 1rem;
+  width: 100%;
+
+  &:hover,
+  &:focus-visible {
+    cursor: pointer;
+    outline: var(--border-medium) solid var(--accent);
+    outline-offset: var(--border-medium-neg);
+  }
+}
+
+.title {
+  font-size: 1.25rem;
+}
+
+.info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+}
+
+.chips {
+  display: flex;
+  column-gap: 1rem;
+}
+
+.metadata {
+  color: var(--secondary);
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  font-size: 0.85rem;
+  align-items: end;
+}

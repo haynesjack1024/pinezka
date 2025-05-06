@@ -1,0 +1,16 @@
+<div class="container">
+  <app-search-bar />
+  <app-filtering-sidebar />
+  <app-sorter />
+  <app-paginator [entriesCount$]="getTotalPostCount()" />
+
+  @for (post of posts$ | async; track post.id) {
+    <app-post-item
+      [routerLink]="isDetailsRouteMatched(post.id) ? ['..'] : [post.id]"
+      [relativeTo]="this.route"
+      queryParamsHandling="preserve"
+      [post]="post"
+    />
+  }
+  <app-paginator [entriesCount$]="getTotalPostCount()" />
+</div>

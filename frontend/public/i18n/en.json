@@ -1,0 +1,123 @@
+{
+  "website-name": "pinezka",
+  "post": {
+    "created-label": "Added",
+    "expiry-label": "Expires",
+    "modified-label": "Last modified",
+    "add-success": "New post added successfully",
+    "add-failure": "Failed to add new post, please check form errors",
+    "edit-success": "Changes saved successfully",
+    "edit-failure": "Failed to save changes, please check form errors",
+    "delete-success": "Deleted post successfully",
+    "delete-failure": "Failed to delete post",
+    "views-label": "Views"
+  },
+  "form": {
+    "error": {
+      "required": "This field is required",
+      "minlength": "Minimum length is {{requiredLength}} characters",
+      "maxlength": "Maximum length is {{requiredLength}} characters",
+      "email": "Invalid email address",
+      "min": "Minimum value is {{min}}",
+      "expiry-input": {
+        "min": "Expiry cannot be earlier than now",
+        "max": "Cannot set a post's expiry later than 6 months from now"
+      }
+    },
+    "label": {
+      "username": "Username",
+      "password": "Password",
+      "login": "Sign In",
+      "city": "City",
+      "category": "Category",
+      "title": "Title",
+      "content": "Content",
+      "add-post": "Add Post",
+      "edit-post": "Edit",
+      "save-edit-post": "Save Changes",
+      "delete-post": "Delete",
+      "expiry": "Expires at",
+      "email": "Email",
+      "change-password": "Change password",
+      "additional-field": {
+        "name": "Field name",
+        "value": "Value"
+      }
+    }
+  },
+  "login": {
+    "success": "Successfully signed in",
+    "failure": "Failed to sign in"
+  },
+  "logout": {
+    "success": "Successfully signed out",
+    "failure": "Failed to sign out"
+  },
+  "patch" : {
+    "success": "Successfully updated user profile",
+    "password-success": "Successfully updated user profile. Please sign in again.",
+    "failure": "Failed to update user profile"
+  },
+  "navbar": {
+    "login": "Sign In",
+    "logout": "Sign Out",
+    "settings": "Account Settings",
+    "add-post": "Add Post",
+    "all-posts": "Search Posts"
+  },
+  "filtering-sidebar-title": "Filtering",
+  "category-filter": {
+    "title": "Category",
+    "current": "CURRENT",
+    "previous": "GO BACK"
+  },
+  "category": {
+    "properties": "Properties",
+    "flats": "Flats",
+    "real-estate": "Real Estate",
+    "sell": "Sell",
+    "rent": "Rent",
+    "job-offers": "Job Offers",
+    "full-time": "Full Time",
+    "part-time": "Part Time",
+    "cars": "Cars",
+    "services": "Services",
+    "electronics": "Electronics",
+    "animals": "Animals",
+    "dogs": "Dogs",
+    "cats": "Cats",
+    "guinea-pigs": "Guinea Pigs"
+  },
+  "city-filter": {
+    "title": "City",
+    "all-option": "--"
+  },
+  "expiry-filter": {
+    "title": "Expired"
+  },
+  "sorting": {
+    "alpha": "Alphabetically",
+    "modified": "By last modification date",
+    "views": "By view count"
+  },
+  "modal": {
+    "delete-post": {
+      "title": "Delete post",
+      "content": "Are you sure you wish to delete this post?",
+      "confirm": "Delete",
+      "cancel": "Cancel"
+    },
+    "patch-user": {
+      "title": "Update profile",
+      "content": "Are you sure you wish to save these changes to your profile?",
+      "confirm": "Save",
+      "cancel": "Cancel"
+    }
+  },
+  "additional-fields": {
+    "title": "Additional Fields",
+    "add": "Add field",
+    "remove": "Remove field"
+  },
+  "go-back": "Go back"
+}

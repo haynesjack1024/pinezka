@@ -1,0 +1,13 @@
+@import url("ngx-toastr/toastr");
+
+.toast-message a,
+.toast-message label {
+  color: var(--bright);
+}
+
+.toast-success {
+  background-color: var(--success);
+}
+.toast-error {
+  background-color: var(--error);
+}

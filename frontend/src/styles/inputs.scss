@@ -1,0 +1,66 @@
+@use "colors";
+
+@mixin input-button-base {
+  box-sizing: border-box;
+  padding: var(--padding-input);
+  border-radius: var(--border-radius-standard);
+  font-family: inherit;
+}
+
+select {
+  appearance: none;
+}
+
+input.form-input,
+select,
+textarea {
+  @include input-button-base;
+
+  background-color: var(--bright);
+  border: var(--border-thin) solid var(--shade);
+  box-shadow: var(--light-box-shadow);
+  color: inherit;
+
+  &:focus-visible {
+    outline: var(--border-medium) solid var(--accent);
+    outline-offset: var(--border-thin-neg);
+  }
+
+  &:disabled {
+    background-color: var(--tint);
+    color: var(--shade);
+    outline-color: var(--shade);
+  }
+}
+
+textarea {
+  resize: none;
+}
+
+input[type="submit"],
+button {
+  @include input-button-base;
+
+  background-color: var(--accent);
+  color: var(--tint);
+  border: none;
+  outline: none;
+  box-shadow: var(--medium-box-shadow);
+  transition: box-shadow 0.15s ease;
+  height: fit-content;
+  width: fit-content;
+
+  &:hover,
+  &:focus-visible {
+    box-shadow: var(--heavy-box-shadow);
+  }
+
+  &:hover {
+    cursor: pointer;
+  }
+
+  &:active {
+    outline: var(--border-medium) solid colors.opacify(var(--primary), 0.86);
+    outline-offset: var(--border-medium-neg);
+  }
+}

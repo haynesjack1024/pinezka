@@ -1,0 +1,17 @@
+<form class="form" [formGroup]="formGroup" (ngSubmit)="onSubmit()">
+  <app-back-button />
+  <app-city-select formControlName="city" />
+  <app-category-select formControlName="category" />
+  <app-textarea
+    formControlName="title"
+    name="title"
+    [label]="'form.label.title' | translate"
+  />
+  <app-textarea
+    formControlName="content"
+    name="content"
+    [label]="'form.label.content' | translate"
+  />
+  <app-expiry-input formControlName="expiry" />
+  <input type="submit" [value]="submitLabel | async" />
+</form>

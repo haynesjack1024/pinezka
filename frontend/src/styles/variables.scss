@@ -1,0 +1,40 @@
+@use "colors";
+
+:root {
+  color-scheme: light dark;
+
+  --accent: light-dark(#0880ae, #39b9ed);
+  --warning: light-dark(#f2ac57, #ffb648);
+  --success: light-dark(#14a38b, #1cd1b2);
+  --error: light-dark(#ff7171, #ff5c5c);
+
+  --primary: light-dark(#2c2738, #ffffff);
+  --secondary: light-dark(#756f86, #9d95b2);
+  --muted: light-dark(#7c9cbf, #88b0d8);
+  --bright: light-dark(#ffffff, #1a1622);
+  --shade: light-dark(#dbe2ea, #2c2738);
+  --tint: light-dark(#ebf4f8, #352f42);
+
+  // BOX SHADOW
+
+  --light-box-shadow: 0 4px 8px 0 #{colors.opacify(var(--primary), 0.08)};
+  --medium-box-shadow: 0 2px 6px 0 #{colors.opacify(var(--primary), 0.24)};
+  --heavy-box-shadow: 0 2px 6px 0 #{colors.opacify(var(--primary), 0.42)};
+
+  // BORDER WIDTH
+
+  --border-thin: 0.0625rem;
+  --border-medium: 0.125rem;
+
+  --border-thin-neg: -0.0625rem;
+  --border-medium-neg: -0.125rem;
+
+  // BORDER RADIUS
+
+  --border-radius-standard: 0.5rem;
+  --border-radius-chip: 1.125rem;
+
+  // PADDING
+
+  --padding-input: 0.6rem;
+}

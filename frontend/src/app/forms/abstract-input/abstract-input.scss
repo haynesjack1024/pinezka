@@ -1,0 +1,12 @@
+:host,
+label {
+  display: flex;
+  flex-direction: column;
+  row-gap: 0.5rem;
+}
+
+.error {
+  color: var(--error);
+  height: 0.875rem;
+  font-size: 0.875rem;
+}

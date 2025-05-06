@@ -1,0 +1,48 @@
+@use "colors";
+
+dialog {
+  border: none;
+  border-radius: 1rem;
+  padding: 1.875rem 1.5rem;
+  box-shadow: 0 32px 64px 0 #{colors.opacify(var(--primary), 0.08)};
+  width: 30rem;
+
+  > :first-child {
+    margin-bottom: 1rem;
+    font-size: 1.75rem;
+    font-weight: 500;
+  }
+
+  > :nth-child(2) {
+    margin-bottom: 2.125rem;
+  }
+}
+
+form {
+  display: flex;
+  justify-content: end;
+  gap: 1rem;
+}
+
+button {
+  padding: 0.875rem 2.8125rem;
+}
+
+.cancel {
+  box-shadow: none;
+  background-color: var(--bright);
+  outline: var(--border-medium) solid var(--muted);
+  outline-offset: var(--border-medium-neg);
+  color: var(--muted);
+
+  &:hover,
+  &:focus-visible {
+    color: var(--accent);
+    outline-color: var(--accent);
+  }
+
+  &:active {
+    color: var(--secondary);
+    outline-color: var(--secondary);
+  }
+}
