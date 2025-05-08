@@ -1,0 +1,1 @@
+source "$PWD/backend/.venv/bin/activate"

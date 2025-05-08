@@ -1,0 +1,39 @@
+assert_lefthook_installed = true
+rc = "$PWD/.lefthookrc"
+
+[pre-commit]
+parallel = true
+
+
+[[pre-commit.jobs]]
+name = "backend"
+root = "backend/"
+stage_fixed = true
+
+[pre-commit.jobs.group]
+piped = true
+
+[[pre-commit.jobs.group.jobs]]
+name = "lint backend"
+run = "ruff check --fix"
+
+[[pre-commit.jobs.group.jobs]]
+name = "format backend"
+run = "ruff format"
+
+
+[[pre-commit.jobs]]
+name = "frontend"
+root = "frontend/"
+stage_fixed = true
+
+[pre-commit.jobs.group]
+piped = true
+
+[[pre-commit.jobs.group.jobs]]
+name = "lint frontend"
+run = "pnpm lint"
+
+[[pre-commit.jobs.group.jobs]]
+name = "format frontend"
+run = "pnpm format"

@@ -46,7 +46,7 @@ class PostViewSet(AutoPermissionViewSetMixin, viewsets.ModelViewSet):
         serializer.save(author=self.request.user)
 
     def retrieve(self, request, *args, **kwargs):
-        instance: "models.Post" = self.get_object()
+        instance: models.Post = self.get_object()
         instance.views.add(request.user)
         serializer = self.get_serializer(instance)
         return Response(serializer.data)

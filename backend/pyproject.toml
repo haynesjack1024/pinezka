@@ -1,0 +1,34 @@
+[project]
+name = "pinezka"
+version = "0.1.0"
+readme = "README.md"
+requires-python = ">=3.13"
+
+dependencies = [
+    "django>=5.2",
+    "django-model-utils>=5.0.0",
+    "djangorestframework>=3.16.0",
+    "python-lorem-ipsum>=2.0.0",
+    "rules>=3.5",
+]
+
+[tool.ruff.lint]
+select = [
+    # pycodestyle
+    "E",
+    # Pyflakes
+    "F",
+    # pyupgrade
+    "UP",
+    # flake8-bugbear
+    "B",
+    # flake8-simplify
+    "SIM",
+    # isort
+    "I",
+]
+
+[dependency-groups]
+dev = [
+    "ruff>=0.11.8",
+]
