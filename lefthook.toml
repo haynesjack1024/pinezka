@@ -26,7 +26,6 @@ run = "ruff format {staged_files}"
 [[pre-commit.jobs]]
 name = "frontend"
 root = "frontend/"
-glob = "*.{js,ts}"
 stage_fixed = true
 
 [pre-commit.jobs.group]
@@ -34,8 +33,10 @@ piped = true
 
 [[pre-commit.jobs.group.jobs]]
 name = "lint frontend"
+glob = "*.{js,ts}"
 run = "pnpm lint --lint-file-patterns {staged_files}"
 
 [[pre-commit.jobs.group.jobs]]
 name = "format frontend"
+glob = "*.{js,ts,json,md}"
 run = "pnpm format {staged_files}"
