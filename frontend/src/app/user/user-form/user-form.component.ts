@@ -134,7 +134,7 @@ export class UserFormComponent implements OnInit {
   }
 
   protected removeAdditionalField(controlId: number): void {
-    this.formGroup?.controls.additionalFields.controls.splice(controlId, 1);
+    this.formGroup?.controls.additionalFields.removeAt(controlId);
   }
 
   protected onSubmit(): void {
