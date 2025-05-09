@@ -8,6 +8,7 @@ parallel = true
 [[pre-commit.jobs]]
 name = "backend"
 root = "backend/"
+glob = "*.py"
 stage_fixed = true
 
 [pre-commit.jobs.group]
@@ -15,16 +16,17 @@ piped = true
 
 [[pre-commit.jobs.group.jobs]]
 name = "lint backend"
-run = "ruff check --fix"
+run = "ruff check --fix {staged_files}"
 
 [[pre-commit.jobs.group.jobs]]
 name = "format backend"
-run = "ruff format"
+run = "ruff format {staged_files}"
 
 
 [[pre-commit.jobs]]
 name = "frontend"
 root = "frontend/"
+glob = "*.{js,ts}"
 stage_fixed = true
 
 [pre-commit.jobs.group]
@@ -32,8 +34,8 @@ piped = true
 
 [[pre-commit.jobs.group.jobs]]
 name = "lint frontend"
-run = "pnpm lint"
+run = "pnpm lint --lint-file-patterns {staged_files}"
 
 [[pre-commit.jobs.group.jobs]]
 name = "format frontend"
-run = "pnpm format"
+run = "pnpm format {staged_files}"
