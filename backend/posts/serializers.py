@@ -39,7 +39,7 @@ class PostCategorySerializer(serializers.ModelSerializer):
         try:
             models.PostCategory.validate_is_unique(attrs["name"], attrs["parent"])
         except ValidationError as e:
-            raise exceptions.ValidationError(e.message % e.params, e.code)
+            raise exceptions.ValidationError(e.message % e.params, e.code) from e
 
     def get_children(self, category: "models.PostCategory") -> list[int]:
         with connection.cursor() as cursor:
@@ -53,7 +53,9 @@ class PostCategorySerializer(serializers.ModelSerializer):
                     SELECT
                         n + 1,
                         posts_postcategory.id
-                    FROM cte JOIN posts_postcategory ON cte.id=posts_postcategory.parent_id
+                    FROM cte
+                    JOIN posts_postcategory
+                    ON cte.id=posts_postcategory.parent_id
                 )
                 SELECT id FROM cte WHERE n > 1;
                 """,

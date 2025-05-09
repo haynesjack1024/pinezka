@@ -1,6 +1,6 @@
 {
-  "name": "board-frontend",
-  "version": "0.0.0",
+  "name": "pinezka-frontend",
+  "version": "0.1.0",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
