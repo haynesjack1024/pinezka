@@ -18,7 +18,6 @@ import { AsyncPipe, NgClass, UpperCasePipe } from '@angular/common';
 import { FaIconComponent } from '@fortawesome/angular-fontawesome';
 import { faBars } from '@fortawesome/free-solid-svg-icons';
 import { ChipComponent } from '../chip/chip.component';
-import { ColorSwitcherComponent } from '../color-switcher/color-switcher.component';
 
 @Component({
   selector: 'app-navbar',
@@ -33,7 +32,6 @@ import { ColorSwitcherComponent } from '../color-switcher/color-switcher.compone
     UpperCasePipe,
     RouterLink,
     NgClass,
-    ColorSwitcherComponent,
   ],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.scss',
