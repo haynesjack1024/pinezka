@@ -33,12 +33,12 @@ piped = true
 
 [[pre-commit.jobs.group.jobs]]
 name = "lint frontend"
-glob = "*.{js,ts}"
-run = "pnpm lint --lint-file-patterns {staged_files}"
+glob = "*.{html,ts}"
+run = "pnpm lint"
 stage_fixed = true
 
 [[pre-commit.jobs.group.jobs]]
 name = "format frontend"
-glob = "*.{js,ts,json,md}"
-run = "pnpm format {staged_files}"
+glob = "*.{html,js,ts,json,md}"
+run = "pnpm format"
 stage_fixed = true

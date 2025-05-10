@@ -1,4 +1,3 @@
-
 # Board frontend
 
 Angular frontend for a classified advertising website.

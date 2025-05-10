@@ -53,7 +53,7 @@
     "success": "Successfully signed out",
     "failure": "Failed to sign out"
   },
-  "patch" : {
+  "patch": {
     "success": "Successfully updated user profile",
     "password-success": "Successfully updated user profile. Please sign in again.",
     "failure": "Failed to update user profile"

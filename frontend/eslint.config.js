@@ -9,14 +9,14 @@ module.exports = tseslint.config(
     files: ["**/*.ts"],
     languageOptions: {
       parserOptions: {
-        projectService: true
-      }
+        projectService: true,
+      },
     },
     extends: [
       eslint.configs.recommended,
       ...tseslint.configs.recommended,
       ...tseslint.configs.stylistic,
-      ...angular.configs.tsRecommended
+      ...angular.configs.tsRecommended,
     ],
     processor: angular.processInlineTemplates,
     rules: {
@@ -35,32 +35,32 @@ module.exports = tseslint.config(
       "@angular-eslint/component-class-suffix": [
         "error",
         {
-          suffixes: ["Component", "Page"]
-        }
+          suffixes: ["Component", "Page"],
+        },
       ],
       "@angular-eslint/component-selector": [
         "error",
         {
           type: "element",
           prefix: "app",
-          style: "kebab-case"
-        }
+          style: "kebab-case",
+        },
       ],
       "@angular-eslint/contextual-decorator": "error",
       "@angular-eslint/contextual-lifecycle": "error",
       "@angular-eslint/directive-class-suffix": [
         "error",
         {
-          suffixes: ["Directive"]
-        }
+          suffixes: ["Directive"],
+        },
       ],
       "@angular-eslint/directive-selector": [
         "error",
         {
           type: "attribute",
           prefix: "app",
-          style: "camelCase"
-        }
+          style: "camelCase",
+        },
       ],
       "@angular-eslint/no-attribute-decorator": "off",
       "@angular-eslint/no-conflicting-lifecycle": "error",
@@ -79,8 +79,8 @@ module.exports = tseslint.config(
       "@typescript-eslint/array-type": [
         "error",
         {
-          default: "array"
-        }
+          default: "array",
+        },
       ],
       "@typescript-eslint/await-thenable": "error",
       "@typescript-eslint/ban-ts-comment": "error",
@@ -92,22 +92,22 @@ module.exports = tseslint.config(
         "error",
         {
           allowExpressions: true,
-          allowHigherOrderFunctions: true
-        }
+          allowHigherOrderFunctions: true,
+        },
       ],
       "@typescript-eslint/explicit-member-accessibility": "error",
       "@typescript-eslint/explicit-module-boundary-types": [
         "error",
         {
-          allowArgumentsExplicitlyTypedAsAny: true
-        }
+          allowArgumentsExplicitlyTypedAsAny: true,
+        },
       ],
       "@typescript-eslint/naming-convention": [
         "error",
         {
           selector: "variable",
           format: ["strictCamelCase", "UPPER_CASE"],
-          leadingUnderscore: "allow"
+          leadingUnderscore: "allow",
         },
         {
           selector: [
@@ -118,13 +118,13 @@ module.exports = tseslint.config(
             "classMethod",
             "objectLiteralMethod",
             "typeMethod",
-            "accessor"
+            "accessor",
           ],
-          format: ["strictCamelCase", "StrictPascalCase", "UPPER_CASE"]
+          format: ["strictCamelCase", "StrictPascalCase", "UPPER_CASE"],
         },
         {
           selector: "enumMember",
-          format: ["UPPER_CASE"]
+          format: ["UPPER_CASE"],
         },
         {
           selector: [
@@ -132,10 +132,10 @@ module.exports = tseslint.config(
             "enum",
             "interface",
             "typeAlias",
-            "typeParameter"
+            "typeParameter",
           ],
-          format: ["StrictPascalCase"]
-        }
+          format: ["StrictPascalCase"],
+        },
       ],
       "@typescript-eslint/no-empty-interface": "warn",
       "@typescript-eslint/no-explicit-any": "warn",
@@ -147,8 +147,8 @@ module.exports = tseslint.config(
         "error",
         {
           argsIgnorePattern: "^_",
-          ignoreRestSiblings: true
-        }
+          ignoreRestSiblings: true,
+        },
       ],
       "@typescript-eslint/no-useless-constructor": "error",
       "@typescript-eslint/no-useless-empty-export": "warn",
@@ -161,8 +161,8 @@ module.exports = tseslint.config(
       "@typescript-eslint/promise-function-async": [
         "error",
         {
-          checkArrowFunctions: false
-        }
+          checkArrowFunctions: false,
+        },
       ],
       "@typescript-eslint/require-array-sort-compare": "error",
       "@typescript-eslint/typedef": [
@@ -174,19 +174,19 @@ module.exports = tseslint.config(
           arrayDestructuring: false,
           parameter: true,
           propertyDeclaration: true,
-          variableDeclarationIgnoreFunction: true
+          variableDeclarationIgnoreFunction: true,
           // "objectDestructuring": true
-        }
-      ]
-    }
+        },
+      ],
+    },
   },
   {
     files: ["**/*.html"],
     extends: [
       ...angular.configs.templateRecommended,
-      ...angular.configs.templateAccessibility
+      ...angular.configs.templateAccessibility,
     ],
-    rules: {}
+    rules: {},
   },
-  eslintConfigPrettier
+  eslintConfigPrettier,
 );

@@ -91,7 +91,7 @@ export class PostFormComponent implements OnInit {
         map((params) => params.get('id')),
         filter((id) => id !== null),
         switchMap((id) => this.postService.getPost(parseInt(id))),
-        tap(({ id, created, modified, author, ...rest }) => {
+        tap(({ id, created, modified, author, views, ...rest }) => {
           this.id.next(id);
           this.formGroup.setValue(rest);
         }),
