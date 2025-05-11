@@ -19,6 +19,10 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+
+  .logo {
+    font-family: Plaster;
+  }
 }
 
 @mixin dropdown {
